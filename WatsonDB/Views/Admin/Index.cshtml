@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+
+        @if (ViewBag.displayMenu == "Yes")
+        {
+            <h2>Welcome Admin-<strong>@ViewBag.Name</strong>!</h2>
+            <h3>
+                Please click button below to proceed to Employee Overview page.
+                @Html.ActionLink("Employee Overview", "Overview", "Admin")
+            </h3>
+        }
+        else
+        {
+            <h2>Welcome <strong>@ViewBag.Name</strong></h2>
+            <h3>
+                Please click button below to proceed to your Overview page.
+                @Html.ActionLink("Employee Overview", "Overview", "Employee")
+            </h3>
+        }
+    </div>
+    @*<table class="table table-condensed">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Roles)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span>
+                            <i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Id" value="@Html.Raw(item.Id)" readonly />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="UserRole" value="@Html.Raw(item.Roles)" readonly />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="UserName" value="@Html.Raw(item.UserName)" readonly />
+
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Email" value="@Html.Raw(item.Email)" readonly />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+</body>
+</html>

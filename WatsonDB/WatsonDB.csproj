@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -173,17 +175,98 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AvailablePosition.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Beneficiary.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CareerCenterController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\Group_HealthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Life_InsuranceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Deduction.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Family_Info.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Group_Health.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePlan.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePlanDetail.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePremium.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobApplicant.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Life_Insurance.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CreateRoleViewModel.cs" />
+    <Compile Include="Models\EditRoleViewModel.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\EmployeeAndInsuranceVM.cs" />
+    <Compile Include="Models\GroupHealthGrpHEnrollmentVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JobApplicantVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SelectPdfParameters.cs" />
+    <Compile Include="Models\SpouseAndDependentInsVM.cs" />
+    <Compile Include="Models\UserListViewModel.cs" />
+    <Compile Include="Models\UserRolesViewModel.cs" />
+    <Compile Include="Models\UserRoleViewModel.cs" />
+    <Compile Include="Other_Insurance.cs">
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WatsonDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WatsonDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WatsonDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WatsonDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WatsonDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WatsonDBModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -207,6 +290,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="WatsonDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WatsonDBModel.edmx</DependentUpon>
+      <LastGenOutput>WatsonDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WatsonDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WatsonDBModel.edmx</DependentUpon>
+      <LastGenOutput>WatsonDBModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -241,6 +334,102 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <EntityDeploy Include="WatsonDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WatsonDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="WatsonDBModel.edmx.diagram">
+      <DependentUpon>WatsonDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\CreateRole.cshtml" />
+    <Content Include="Views\RolesAdmin\ListRoles.cshtml" />
+    <Content Include="Views\RolesAdmin\EditRole.cshtml" />
+    <Content Include="Views\RolesAdmin\EditUsersInRole.cshtml" />
+    <Content Include="Views\RolesAdmin\DeleteRole.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\ListUsers.cshtml" />
+    <Content Include="Views\UsersAdmin\CreateUser.cshtml" />
+    <Content Include="Views\UsersAdmin\EditUser.cshtml" />
+    <Content Include="Views\UsersAdmin\ManageUserRoles.cshtml" />
+    <Content Include="Views\UsersAdmin\DeleteUser.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Overview.cshtml" />
+    <Content Include="Views\Employee\CreateEmployee.cshtml" />
+    <Content Include="Views\Employee\EnrollmentSelection.cshtml" />
+    <Content Include="Views\Employee\EditEmployee.cshtml" />
+    <Content Include="Views\Employee\EmployeeDetail.cshtml" />
+    <Content Include="Views\Employee\DeleteEmployee.cshtml" />
+    <Content Include="Views\Employee\FamilyOverview.cshtml" />
+    <Content Include="Views\Employee\SpouseEnrollment.cshtml" />
+    <Content Include="Views\Employee\EditSpouse.cshtml" />
+    <Content Include="Views\Employee\SpouseDetail.cshtml" />
+    <Content Include="Views\Employee\DeleteSpouse.cshtml" />
+    <Content Include="Views\Employee\AddDependent.cshtml" />
+    <Content Include="Views\Employee\EditDependent.cshtml" />
+    <Content Include="Views\Employee\DependentDetail.cshtml" />
+    <Content Include="Views\Employee\DeleteDependent.cshtml" />
+    <Content Include="Views\Employee\FamilyEnrollment.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Overview.cshtml" />
+    <Content Include="Views\Admin\EnrollmentSelection.cshtml" />
+    <Content Include="Views\Admin\CreateEmployee.cshtml" />
+    <Content Include="Views\Admin\EditEmployee.cshtml" />
+    <Content Include="Views\Admin\EmployeeDetail.cshtml" />
+    <Content Include="Views\Admin\DeleteEmployee.cshtml" />
+    <Content Include="Views\Admin\FamilyOverview.cshtml" />
+    <Content Include="Views\Admin\FamilyEnrollment.cshtml" />
+    <Content Include="Views\Admin\SpouseEnrollment.cshtml" />
+    <Content Include="Views\Admin\EditSpouse.cshtml" />
+    <Content Include="Views\Admin\SpouseDetail.cshtml" />
+    <Content Include="Views\Admin\DeleteSpouse.cshtml" />
+    <Content Include="Views\Admin\AddDependent.cshtml" />
+    <Content Include="Views\Admin\EditDependent.cshtml" />
+    <Content Include="Views\Admin\DependentDetail.cshtml" />
+    <Content Include="Views\Admin\DeleteDependent.cshtml" />
+    <Content Include="Views\Admin\GroupHealthEnrollment.cshtml" />
+    <Content Include="Views\Admin\EditGroupHealthIns.cshtml" />
+    <Content Include="Views\Admin\SalaryRedirection.cshtml" />
+    <Content Include="Views\Admin\EditSalaryRedirection.cshtml" />
+    <Content Include="Views\Admin\AuthorizationForm.cshtml" />
+    <Content Include="Views\Admin\EditAuthorizationForm.cshtml" />
+    <Content Include="Views\Admin\DeleteGroupHealthIns.cshtml" />
+    <Content Include="Views\Group_Health\GroupHealthEnrollment.cshtml" />
+    <Content Include="Views\Group_Health\EditGroupHealthIns.cshtml" />
+    <Content Include="Views\Group_Health\SalaryRedirection.cshtml" />
+    <Content Include="Views\Group_Health\EditSalaryRedirection.cshtml" />
+    <Content Include="Views\Group_Health\AuthorizationForm.cshtml" />
+    <Content Include="Views\Group_Health\EditAuthorizationForm.cshtml" />
+    <Content Include="Views\Group_Health\DeleteGroupHealthIns.cshtml" />
+    <Content Include="Views\Life_Insurance\LifeInsuranceEnrollment.cshtml" />
+    <Content Include="Views\Admin\LifeInsuranceEnrollment.cshtml" />
+    <Content Include="Views\Admin\EditLifeInsurance.cshtml" />
+    <Content Include="Views\Life_Insurance\EditLifeInsurance.cshtml" />
+    <Content Include="Views\Admin\AddBeneficiary.cshtml" />
+    <Content Include="Views\Life_Insurance\AddBeneficiary.cshtml" />
+    <Content Include="Views\Life_Insurance\EditBeneficiary.cshtml" />
+    <Content Include="Views\Admin\EditBeneficiary.cshtml" />
+    <Content Include="Views\Admin\DeleteBeneficiary.cshtml" />
+    <Content Include="Views\Life_Insurance\DeleteBeneficiary.cshtml" />
+    <Content Include="Views\Life_Insurance\DeleteLifeInsurance.cshtml" />
+    <Content Include="Views\Admin\DeleteLifeInsurance.cshtml" />
+    <Content Include="Views\CareerCenter\Index.cshtml" />
+    <Content Include="Views\CareerCenter\JobList.cshtml" />
+    <Content Include="Views\CareerCenter\JobDescription.cshtml" />
+    <Content Include="Views\CareerCenter\CreateJobPosition.cshtml" />
+    <Content Include="Views\CareerCenter\JobApplicantDetails.cshtml" />
+    <Content Include="Views\CareerCenter\CreateJobApplicant.cshtml" />
+    <Content Include="Views\CareerCenter\EditJobApplicant.cshtml" />
+    <Content Include="Views\CareerCenter\DeleteJobApplicant.cshtml" />
+    <Content Include="Views\Admin\JobList.cshtml" />
+    <Content Include="Views\Admin\JobDescription.cshtml" />
+    <Content Include="Views\Admin\CreateJobPosition.cshtml" />
+    <Content Include="Views\Admin\JobApplicantDetails.cshtml" />
+    <Content Include="Views\Admin\CreateJobApplicant.cshtml" />
+    <Content Include="Views\Admin\EditJobApplicant.cshtml" />
+    <Content Include="Views\Admin\DeleteJobApplicant.cshtml" />
+    <Content Include="Views\Admin\Career.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -257,6 +446,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

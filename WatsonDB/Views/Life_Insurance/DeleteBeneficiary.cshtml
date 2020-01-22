@@ -1,0 +1,234 @@
+﻿@model WatsonDB.Beneficiary
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Delete Beneficiary</title>
+</head>
+<body>
+    <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
+    <input type="hidden" id="Beneficiary_id" class="form-control" name="Beneficiary_id" value="@ViewBag.Beneficiary_id" />
+    <hr />
+    <div class="collapsible" id="DeleteBeneficiary">Delete Beneficiary</div>
+    <div class="content">
+        <form action="/Employee/DeleteBeneficiary" method="post">
+            <div id="divBeneficiaryInfo">
+                <dl class="dl-horizontal">
+                    <dt>
+                        <label class="col-md-offset-2">Status:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        <label class="checkbox-inline"><input disabled type="checkbox" id="PrimaryBeneficiary" class="checkbox-inline" name="PrimaryBeneficiary" value="" @((Model.PrimaryBeneficiary) == "True" ? "checked" : "") />Primary</label>
+                        <label class="checkbox-inline"><input disabled type="checkbox" id="ContingentBeneficiary" class="checkbox-inline" name="ContingentBeneficiary" value="" @((Model.ContingentBeneficiary) == "True" ? "checked" : "") />Contingent</label>
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">First Name:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">Last Name:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">SSN:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.SSN)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">Relation:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.RelationshipToEmployee)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">Address:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">City:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.CIty)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">State:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.State)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">ZipCode:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.ZipCode)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">DOB:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Convert.ToDateTime(Model.DOB).ToString("yyyy-MM-dd")
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">Number:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.PhoneNumber)
+                    </dd>
+                    <dt>
+                        <label class="col-md-offset-2">% of Benefits:</label>
+                    </dt>
+                    <dd class="form-group-sm">
+                        @Html.DisplayFor(model => model.PercentageOfBenefits)
+                    </dd>
+                </dl>
+            </div>
+        </form>
+
+        @using (Html.BeginForm())
+        {
+            <form action="DeleteBeneficiary" id="@Model.Beneficiary_id" method="post">
+                @Html.AntiForgeryToken()
+                <span id="confirmDeleteSpan_@Model.Beneficiary_id">Are you sure you want to delete?</span>
+                <button type="submit" class="btn" onclick="ConfirmDelete('@Model.Beneficiary_id',true" )>Yes</button>
+                <a href="#" class="btn" onclick="ConfirmDelete('@Model.Beneficiary_id',false" )>No</a>
+                @*<span id="deleteSpan_@Model.family.FamilyMember_id"></span>*@
+                @*<a href="#" class="btn-danger" onclick="ConfirmDelete('@Model.family.FamilyMember_id',true" )>Delete</a>*@
+            </form>
+        }
+        <p>
+            @Html.ActionLink("Back to Life Insurance", "EditLifeInsurance", "Life_Insurance", new { Employee_id = ViewBag.Employee_id }, null)
+        </p>
+    </div>
+
+
+
+</body>
+</html>
+
+<style>
+    .collapsible {
+        background-color: #2e4593;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: center;
+        outline: none;
+        font-size: 15px;
+    }
+
+        .active, .collapsible:hover {
+            background-color: #2e4593;
+        }
+
+    .content {
+        padding: 0 10px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+    }
+
+    .button {
+        text-align: right;
+    }
+
+    .btn:hover {
+        background-color: #2e4593;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+        display: inline-flex;
+        padding: 8px 8px;
+    }
+
+        a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+</style>
+
+<script>
+    var col = document.querySelectorAll(".collapsible");
+    var i;
+
+    var Employee_id;
+
+    for (i = 0; i < col.length; i++) {
+        col[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+
+        });
+    }
+
+    $(document).ready(function () {
+        $('.checkbox-inline').click(function () {
+            $('.checkbox-inline').not(this).prop('checked', false);
+        });
+    });
+
+
+
+    @*document.querySelector("#submitBeneficiaryUpdate").addEventListener("click", function () {
+        beneficiaryUpdate = document.getElementById("submitBeneficiaryUpdate");
+
+        var message;
+        alert = confirm("Beneificiary information has been saved. Thank you!")
+
+        if (beneficiaryUpdate.onclick) {
+            if (alert == true) {
+
+                message = "Please proceed to Life Insurance edit page to review information. Thank you!!";
+                var alert = confirm(message)
+                if (alert == true) {
+
+                    window.location.href = "/Life_Insurance/EditLifeInsurance&Employee_id=" + @ViewBag.Employee_id;
+
+                }
+                else {
+                    window.location.href = "/Employee/EmpOverview/?Employee_id=" + @ViewBag.Employee_id;
+                }
+            }
+        }
+        else {
+            if (alert == false) {
+
+                window.location.href = "/Employee/EmpOverview/?Employee_id=" + @ViewBag.Employee_id;
+            }
+        }
+    })*@
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

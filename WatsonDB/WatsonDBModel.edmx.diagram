@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0873b94dd6494378a040db674a957b45" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="WatsonDBModel.AspNetRole" Width="1.5" PointX="4.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.AspNetUserClaim" Width="1.5" PointX="4.125" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.AspNetUserLogin" Width="1.5" PointX="4.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.AspNetUser" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.AvailablePosition" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Beneficiary" Width="1.5" PointX="2.375" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Deduction" Width="1.5" PointX="14.625" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Employee" Width="1.5" PointX="7.875" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Family_Info" Width="1.5" PointX="2.375" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Group_Health" Width="1.5" PointX="5.375" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.InsurancePlanDetail" Width="1.5" PointX="12.625" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.InsurancePlan" Width="1.5" PointX="10.125" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.InsurancePremium" Width="1.5" PointX="12.625" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.JobApplicant" Width="1.5" PointX="18.125" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Life_Insurance" Width="1.5" PointX="11" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WatsonDBModel.Other_Insurance" Width="1.5" PointX="4.875" PointY="31.5" IsExpanded="true" />
+        <AssociationConnector Association="WatsonDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Employee_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Beneficiary_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Deductions_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Family_Info_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Group_Health_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_InsurancePlan_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_JobApplicant_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Life_Insurance_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_Other_Insurance_Family_Info" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_InsurancePlanDetail_InsurancePlan" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.FK_InsurancePremium_InsurancePlan" ManuallyRouted="false" />
+        <AssociationConnector Association="WatsonDBModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

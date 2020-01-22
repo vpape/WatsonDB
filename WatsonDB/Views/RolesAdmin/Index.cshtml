@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h2>Welcome Admin. Now you can Create, Edit, and Delete user Role.</h2>
+}
+else
+{
+    <h2>Welcome<strong>@ViewBag.Name</strong>! Please click @Html.ActionLink("", "", "") --> Redirect to User or Profile</h2>
+}
+
+<p>
+    @Html.ActionLink("Create Role", "RolesAdmin", "CreateRole")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditRole","RolesAdmin", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "RolesAdmin", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteRole", "RolesAdmin", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+<div class="form-group">
+    <div class="col-md-2">
+        <button onclick="return CreateRole()" class="btn">Create Role</button>
+        <button onclick="return ListRoles()" class="btn">List Roles</button>
+    </div>
+</div>
+
+<script>
+    function CreateRole() {
+        window.location.href = "/RolesAdmin/CreateRole";
+
+    }
+
+    function ListRoles() {
+        window.location.href = "/RolesAdmin/ListRoles";
+
+    }
+</script>
+
+
+

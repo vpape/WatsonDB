@@ -1,0 +1,49 @@
+﻿@model List<WatsonDB.Models.UserRolesViewModel>
+@{
+    ViewBag.Title = "ManageUserRoles";
+
+    var UserId = ViewBag.UserId;
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+@using (Html.BeginForm("EditUsersInRole", "RolesAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="card">
+        <div class="card-header">
+            <h2>Manager User Roles</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check-input">
+                    <input type="hidden" value="@Model[i].RoleId" />
+                    <input type="hidden" value="@Model[i].UserRole" />
+                    <input type="checkbox" class="form-check-input" for="@Model[i].isSelected"/>
+                    <label class="form-check-label" for="@Model[i].UserRole">
+                        @Model[i].UserRole
+                    </label>
+                </div>
+            }
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" value="Update" id="@UserId" style="width:auto" />
+            @*<button type="button" id="@ViewBag.userId" onclick="return Cancel()">Cancel</button>*@
+            @Html.ActionLink("Cancel", "EditUser", "UsersAdmin", new { UserId = UserId }, null)
+        </div>
+    </div>
+}
+
+
+
+
