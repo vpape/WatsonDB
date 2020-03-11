@@ -6,29 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Edit Employee</title>
 </head>
 <body>
     <div class="form-horizontal">
         <hr />
         <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
-        <input type="hidden" id="EmployeeRole" class="form-control" name="EmployeeRole" value="@ViewBag.EmployeeRole" />
         <div class="collapsible" id="FirstStep">Edit Info</div>
         <div id="divEmpEnrollment" class="content">
             <p></p>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Employee Role:</label>
-                <div class="col-md-10">
-                    <input type="text" id="EmpRole" class="form-control" name="UserRole" value="@Html.Raw(Model.employee.UserRole)" disabled>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Employee Number:</label>
-                <div class="col-md-10">
-                    <input type="text" id="EmployeeNumber" class="form-control" name="EmployeeNumber" value="@Html.Raw(Model.employee.EmployeeNumber)" disabled>
-                </div>
-            </div>
             <div class="form-group">
                 <label for="CurrentEmployer" class="col-md-2 control-label">Current Employer:</label>
                 <div class="col-md-10">
@@ -38,7 +26,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">Hire Date:</label>
                 <div class="col-md-10">
-                    <input type="date" id="HireDate" class="form-control" name="HireDate" value="@Convert.ToDateTime(Model.employee.HireDate).ToString("yyyy-MM-dd")" />
+                    <input type="date" id="HireDate" class="form-control" name="HireDate"  value="@Convert.ToDateTime(Model.employee.HireDate).ToString("yyyy-MM-dd")" />
                 </div>
             </div>
             <div class="form-group">
@@ -191,20 +179,20 @@
                 <div>
                     <div class="form-group">
                         <label>Are you covered by any other insurance, including Medicare?</label>
-                        @*<label class="radio-inline"><input type="radio" id="empOtherGrpHinsCoverage" class="radio-inline" onclick="showHidEmpOtherInsCoverage()" name="OtherInsuranceCoverage" value="True" @((Model.grpHealth.OtherInsuranceCoverage == "True") ? "checked" : "") />Yes</label>
-                        <label class="radio-inline"><input type="radio" id="empOtherGrpHinsCoverage" class="radio-inline" onclick="showHidEmpOtherInsCoverage()" name="OtherInsuranceCoverage" value="False" @((Model.grpHealth.OtherInsuranceCoverage == "False") ? "checked" : "") />No</label>*@
+                        <label class="radio-inline"><input type="radio" id="empOtherGrpHinsCoverage" class="radio-inline" onclick="showHidEmpOtherInsCoverage()" name="OtherInsuranceCoverage" value="True" @((Model.grpHealth.OtherInsuranceCoverage == "True") ? "checked" : "") />Yes</label>
+                        <label class="radio-inline"><input type="radio" id="empOtherGrpHinsCoverage" class="radio-inline" onclick="showHidEmpOtherInsCoverage()" name="OtherInsuranceCoverage" value="False" @((Model.grpHealth.OtherInsuranceCoverage == "False") ? "checked" : "") />No</label>
                         @*@Html.RadioButtonFor(model => model.grpHealth.OtherInsuranceCoverage, "Yes", true) Yes @Html.RadioButtonFor(model => model.grpHealth.OtherInsuranceCoverage, "No", false) No*@
                     </div>
                     <p></p>
                     <div id="empInsInfo">
                         <div class="form-group col-md-3">
-                            @*<input type="text" id="empInsCarrier" class="form-control" placeholder="Insurance Company" name="InsuranceCarrier" value="@Html.Raw(Model.grpHealth.InsuranceCarrier)" />*@
+                            <input type="text" id="empInsCarrier" class="form-control" placeholder="Insurance Company" name="InsuranceCarrier" value="@Html.Raw(Model.grpHealth.InsuranceCarrier)" />
                         </div>
                         <div class="form-group col-md-3">
-                            @*<input type="text" id="empInsPolicyNumber" class="form-control" placeholder="Policy #" name="PolicyNumber" value="@Html.Raw(Model.grpHealth.PolicyNumber)" />*@
+                            <input type="text" id="empInsPolicyNumber" class="form-control" placeholder="Policy #" name="PolicyNumber" value="@Html.Raw(Model.grpHealth.PolicyNumber)" />
                         </div>
                         <div class="form-group col-md-3">
-                            @*<input type="tel" id="empInsPhoneNumber" class="form-control" placeholder="Phone #" name="PhoneNumber" size="3" maxlength="14" value="@Html.Raw(Model.grpHealth.PhoneNumber)" />*@
+                            <input type="tel" id="empInsPhoneNumber" class="form-control" placeholder="Phone #" name="PhoneNumber" size="3" maxlength="14" value="@Html.Raw(Model.grpHealth.PhoneNumber)" />
                         </div>
                     </div>
                 </div>
@@ -215,7 +203,7 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Back to List", "Overview", "Admin")
+                    @Html.ActionLink("Back to List", "Overview")
                 </p>
             </div>
         </div>
@@ -327,7 +315,7 @@
         })
     }
 
-    document.querySelector("#EditEmployeeEnrollment").addEventListener("click", function () {
+    @*document.querySelector("#EditEmployeeEnrollment").addEventListener("click", function () {
         submit = document.getElementById("EditEmployeeEnrollment");
 
         var message;
@@ -338,7 +326,7 @@
             message = "Please proceed to Employee Detail to review information, Thank you!!";
             var alert = confirm(message)
             if (alert == true) {
-                    window.location.href = "/Admin/EmployeeDetail?Employee_id=" + @ViewBag.Employee_id;
+                window.location.href = "/Admin/EmployeeDetail?Employee_id=" + @ViewBag.Employee_id;
             }
 
         }
@@ -355,13 +343,11 @@
                 window.location.href = "/Admin/Overview/?Employee_id=" + @ViewBag.Employee_id;
             }
         }
-    });
+    });*@
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#EditEmployeeEnrollment").addEventListener("click", function () {
             Employee_id = document.getElementById("Employee_id").value;
-            EmpRole = document.getElementById("EmpRole").value;
-            EmployeeNumber = document.getElementById("EmployeeNumber").value;
             CurrentEmployer = document.getElementById("CurrentEmployer").value;
             JobTitle = document.getElementById("JobTitle").value;
             SSN = document.getElementById("SSN").value;
@@ -397,8 +383,6 @@
 
             var data = {
                 "Employee_id": Employee_id,
-                "EmpRole": EmpRole,
-                "EmployeeNumber": EmployeeNumber,
                 "CurrentEmployer": CurrentEmployer,
                 "JobTitle": JobTitle,
                 "SSN": SSN,

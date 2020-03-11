@@ -48,54 +48,55 @@ namespace WatsonDB.Controllers
         }
 
 
+
         //====================================
         // GET: Index 
         //==================================== 
 
+        public ActionResult Index()
+        {
+            return View(roleManager.Roles);
+
+        }      
+
         //public ActionResult Index()
         //{
-        //    return View(roleManager.Roles);
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        if (!isAdminUser())
+        //        {
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+
+        //    var roles = context.Roles.ToList();
+        //    return View(roles);
 
         //}
 
-        public ActionResult Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (!isAdminUser())
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            var roles = context.Roles.ToList();
-            return View(roles);
-
-        }
-
-        public bool isAdminUser()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                var s = UserManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
+        //public bool isAdminUser()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        var user = User.Identity;
+        //        ApplicationDbContext context = new ApplicationDbContext();
+        //        var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //        var s = UserManager.GetRoles(user.GetUserId());
+        //        if (s[0].ToString() == "Admin")
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return false;
+        //}
 
         // GET: /Roles/Details/5
         public async Task<ActionResult> Details(string id)
@@ -125,6 +126,7 @@ namespace WatsonDB.Controllers
         //====================================
         // GET: CreateRole 
         //====================================  
+
         [HttpGet]
         public ActionResult CreateRole()
         {

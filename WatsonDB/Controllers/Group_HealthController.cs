@@ -24,9 +24,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Web.Mvc;
 using WatsonDB.Models;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace WatsonDB.Controllers
 {
+    //[Authorize(Roles = "Employee, Manager, Owner, Admin")]
     public class Group_HealthController : Controller
     {
         private WatsonDBContext db = new WatsonDBContext();
@@ -50,10 +52,16 @@ namespace WatsonDB.Controllers
         //====================================
         // Get: GroupHealthEnrollment
         //====================================
-        public ActionResult GroupHealthEnrollment(int? Employee_id, int? GroupHealthInsurance_id)
+        public ActionResult GroupHealthEnrollment(int? Employee_id, int? GroupHealthInsurance_id, string userId)
         {
-            ViewBag.GroupHealthInsurance_id = GroupHealthInsurance_id;
+            userId = userId ?? User.Identity.GetUserId();
+
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            Employee_id = employee.Employee_id;
+
             ViewBag.Employee_id = Employee_id;
+            ViewBag.GroupHealthInsurance_id = GroupHealthInsurance_id;
 
             GroupHealthGrpHEnrollmentVM groupHGrpHEnrollmentVM = new GroupHealthGrpHEnrollmentVM();
 
@@ -178,8 +186,14 @@ namespace WatsonDB.Controllers
         //====================================
         //Edit-EditGroupHealthIns
         //====================================
-        public ActionResult EditGroupHealthIns(int? Employee_id, int? GroupHealthInsurance_id)
+        public ActionResult EditGroupHealthIns(int? Employee_id, int? GroupHealthInsurance_id, string userId)
         {
+            userId = userId ?? User.Identity.GetUserId();
+
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            Employee_id = employee.Employee_id;
+
             ViewBag.GroupHealthInsurance_id = GroupHealthInsurance_id;
             ViewBag.Employee_id = Employee_id;
 
@@ -277,70 +291,70 @@ namespace WatsonDB.Controllers
 
             int result = g.Employee_id;
 
-            CreateGrpHealthPDF(g.Employee_id);
+            //CreateGrpHealthPDF(g.Employee_id);
 
             return Json(new { data = result }, JsonRequestBehavior.AllowGet);
         }
 
-        public void CreateGrpHealthPDF(int Employee_id)
-        {
-            System.Console.WriteLine("Starting conversion with WebClient ...");
+        //public void CreateGrpHealthPDF(int? Employee_id)
+        //{
+        //    System.Console.WriteLine("Starting conversion with WebClient ...");
 
-            // set parameters
-            SelectPdfParameters parameters = new SelectPdfParameters();
-            parameters.key = apiKey;
-            parameters.url = GrpHInsURL + Employee_id;
+        //    // set parameters
+        //    SelectPdfParameters parameters = new SelectPdfParameters();
+        //    parameters.key = apiKey;
+        //    parameters.url = GrpHInsURL + Employee_id;
 
-            // JSON serialize parameters
-            string jsonData = JsonConvert.SerializeObject(parameters);
-            byte[] byteData = Encoding.UTF8.GetBytes(jsonData);
+        //    // JSON serialize parameters
+        //    string jsonData = JsonConvert.SerializeObject(parameters);
+        //    byte[] byteData = Encoding.UTF8.GetBytes(jsonData);
 
-            // create WebClient object
-            WebClient webClient = new WebClient();
-            webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+        //    // create WebClient object
+        //    WebClient webClient = new WebClient();
+        //    webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-            // POST parameters (if response code is not 200 OK, a WebException is raised)
-            try
-            {
-                byte[] result = webClient.UploadData(apiEndpoint, "POST", byteData);
+        //    // POST parameters (if response code is not 200 OK, a WebException is raised)
+        //    try
+        //    {
+        //        byte[] result = webClient.UploadData(apiEndpoint, "POST", byteData);
 
-                // all ok - read PDF and write on disk (binary read!!!!)
-                MemoryStream ms = new MemoryStream(result);
+        //        // all ok - read PDF and write on disk (binary read!!!!)
+        //        MemoryStream ms = new MemoryStream(result);
 
-                // write to file
-                FileStream file = new FileStream("test2.pdf", FileMode.Create, FileAccess.Write);
-                ms.WriteTo(file);
-                file.Close();
+        //        // write to file
+        //        FileStream file = new FileStream("test2.pdf", FileMode.Create, FileAccess.Write);
+        //        ms.WriteTo(file);
+        //        file.Close();
 
-            }
-            catch (WebException webEx)
-            {
-                // an error occurred
-                System.Console.WriteLine("Error: " + webEx.Message);
+        //    }
+        //    catch (WebException webEx)
+        //    {
+        //        // an error occurred
+        //        System.Console.WriteLine("Error: " + webEx.Message);
 
-                HttpWebResponse response = (HttpWebResponse)webEx.Response;
-                Stream responseStream = response.GetResponseStream();
+        //        HttpWebResponse response = (HttpWebResponse)webEx.Response;
+        //        Stream responseStream = response.GetResponseStream();
 
-                // get details of the error message if available (text read!!!)
-                StreamReader readStream = new StreamReader(responseStream);
-                string message = readStream.ReadToEnd();
-                responseStream.Close();
+        //        // get details of the error message if available (text read!!!)
+        //        StreamReader readStream = new StreamReader(responseStream);
+        //        string message = readStream.ReadToEnd();
+        //        responseStream.Close();
 
-                System.Console.WriteLine("Error Message: " + message);
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine("Error: " + ex.Message);
-            }
+        //        System.Console.WriteLine("Error Message: " + message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Console.WriteLine("Error: " + ex.Message);
+        //    }
 
-            System.Console.WriteLine("Finished.");
+        //    System.Console.WriteLine("Finished.");
 
-            // return resulted pdf document
-            //FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-            //fileResult.FileDownloadName = "GrpHealth_Insurance.pdf";
-            //return fileResult;
+        //    // return resulted pdf document
+        //    //FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+        //    //fileResult.FileDownloadName = "GrpHealth_Insurance.pdf";
+        //    //return fileResult;
 
-        }
+        //}
 
         //SalaryRedirect-Start----------------------------------------------------------------------------------
 

@@ -18,21 +18,39 @@ else
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Name)
         </th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var role in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @role.Id
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditRole","RolesAdmin", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", "RolesAdmin", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteRole", "RolesAdmin", new { id = item.Id })
+                @role.Name
+            </td>
+            <td>
+                <form action="DeleteRole" id="@role.Id" method="post">
+                    @Html.ActionLink("Edit", "EditRole", "RolesAdmin", new { RoleId = role.Id }, null)
+                    @*<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you wan to delete role @role.Name)">Delete</button>*@
+
+                    <span id="confirmDeleteSpan_@role.Id" style="display: none;">
+                        <span>Are you sure you want to delete?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <a href="#" class="btn btn-primary" onclick="ConfirmDelete('@role.Id', false)">No</a>
+                    </span>
+                    <span id="deleteSpan_@role.Id">
+                        <a href="#" class="btn btn-danger" onclick="ConfirmDelete('@role.Id', true)">Delete</a>
+                    </span>
+                </form>
+
+                @*@Html.ActionLink("Edit", "EditRole", "RolesAdmin", new { id = role.Id }) |
+                @Html.ActionLink("Details", "Details", "RolesAdmin", new { id = role.Id }) |
+                @Html.ActionLink("Delete", "DeleteRole", "RolesAdmin", new { id = role.Id })*@
             </td>
         </tr>
     }
@@ -52,6 +70,22 @@ else
 
     function ListRoles() {
         window.location.href = "/RolesAdmin/ListRoles";
+
+    }
+
+    function ConfirmDelete(id, isDeleteClicked) {
+        var confirmDeleteSpan = 'confirmDeleteSpan_' + id;
+        var deleteSpan = 'deleteSpan_' + id;
+
+        if (isDeleteClicked) {
+            $('#' + deleteSpan).hide();
+            $('#' + confirmDeleteSpan).show();
+
+        }
+        else {
+            $('#' + deleteSpan).show();
+            $('#' + confirmDeleteSpan).hide();
+        }
 
     }
 </script>

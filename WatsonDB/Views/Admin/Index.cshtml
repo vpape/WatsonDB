@@ -1,78 +1,143 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
-@{
-    ViewBag.Title = "Index";
-}
-
+﻿@*@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>*@
+@model IEnumerable<WatsonDB.Models.UserListViewModel>
 <!DOCTYPE html>
-
+@{
+    var userId = ViewBag.userId;
+    var Id = ViewBag.Id;
+    var EmployeeNumber = ViewBag.EmployeeNumber;
+}
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Index</title>
 </head>
 <body>
-    <div>
-
-        @if (ViewBag.displayMenu == "Yes")
+    @using (Html.BeginForm("Index", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        if (ViewBag.displayMenu == "Yes")
         {
-            <h2>Welcome Admin-<strong>@ViewBag.Name</strong>!</h2>
-            <h3>
-                Please click button below to proceed to Employee Overview page.
-                @Html.ActionLink("Employee Overview", "Overview", "Admin")
-            </h3>
+            <h2>Welcome Admin- <strong>@ViewBag.Name</strong>!</h2>
+            <hr />
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="background-color: #2e4593;">
+                    <h3 class="box-title">
+                        <b>User Information</b>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover" id="UsersWithRoles">
+                        <thead>
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Username</b></td>
+                                <td><b>Email</b></td>
+                                <td><b>UserRole</b></td>
+                                <td><b>Employee #</b></td>
+                                <td><b></b></td>
+                            </tr>
+                        </thead>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="card-header">
+                                        <h5>
+                                            @user.Id
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            @user.UserName
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            @user.Email
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            @user.UserRole
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            @user.EmployeeNumber
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <form action="/Admin/CreateEmployee" method="post">
+                                            <input type="hidden" id="Id" name="Id" value="@user.Id" />
+                                            <input type="hidden" id="EmployeeNumber" name="EmployeeNumber" value="@user.EmployeeNumber" />
+                                            <input type="hidden" id="UserRole" name="UserRole" value="@user.UserRole" />
+                                            <button type="submit" id="@user.Id" class="btn">Enroll</button>
+                                        </form>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <div>
+                        @*@Html.ActionLink("Create User", "CreateUser", "UsersAdmin")- will need for IdentityFramework- UserAdmin/RolesAdmin*@
+                        @Html.ActionLink("Create User", "Register", "Account")
+                    </div>
+                </div>
+            </div>
         }
         else
         {
-            <h2>Welcome <strong>@ViewBag.Name</strong></h2>
-            <h3>
-                Please click button below to proceed to your Overview page.
-                @Html.ActionLink("Employee Overview", "Overview", "Employee")
-            </h3>
+            <h2>Welcome <strong>@ViewBag.Name</strong>!</h2>
+            <h4>
+                @Html.ActionLink("Click to Proceed", "Index", "Employee")
+            </h4>
         }
-    </div>
-    @*<table class="table table-condensed">
-        <thead class="thead-dark">
-            <tr>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Roles)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <span>
-                            <i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-                        </span>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Id" value="@Html.Raw(item.Id)" readonly />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="UserRole" value="@Html.Raw(item.Roles)" readonly />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="UserName" value="@Html.Raw(item.UserName)" readonly />
-
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Email" value="@Html.Raw(item.Email)" readonly />
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
+    }
 </body>
 </html>
+
+<style>
+    .btn:hover {
+        background-color: #2e4593;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+        display: inline-flex;
+        padding: 8px 16px;
+    }
+
+        a:hover {
+            background-color: #2e4593;
+            color: white;
+        }
+</style>
+<script>
+
+
+</script>
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WatsonDB.Controllers
 {
+    //[Authorize(Roles = "Employee, Manager, Owner, Admin")]
     public class HomeController : Controller
     {
         public ActionResult Index()

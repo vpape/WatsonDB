@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityUser
 @{
     ViewBag.Title = "Index";
 }
@@ -11,68 +11,87 @@
     <title>Index</title>
 </head>
 <body>
-    <div>
+    <hr />
+    @if (ViewBag.displayMenu == "Yes")
+    {
+        <h2>Welcome <strong>@ViewBag.Name</strong>!</h2>
+        <hr />
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background-color: #2e4593;">
+                <h3 class="box-title">
+                    <b>User Information</b>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+                    <thead>
+                        <tr>
+                            <td><b>Id</b></td>
+                            <td><b>Username</b></td>
+                            <td><b>Email</b></td>
+                            <td><b>UserRole</b></td>
+                            <td><b>Employee #</b></td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <div class="card-header">
+                                @ViewBag.userId
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @ViewBag.userName
+                                </h5>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @ViewBag.Email
+                                </h5>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @ViewBag.UserRole
+                                </h5>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @ViewBag.EmployeeNumber
+                                </h5>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <button onclick="return NewEmployeeEnrollment()" class="btn">Enroll</button>
+                </div>
 
-        @if (ViewBag.displayMenu == "Yes")
-        {
-            <h2>Welcome Admin-<strong>@ViewBag.Name</strong>!</h2>
-            <h3>
-                Please click button below to proceed to Employee Overview page.
-                @Html.ActionLink("Employee Overview", "Admin", "Overview")
-            </h3>
-        }
-        else
-        {
-            <h2>Welcome <strong>@ViewBag.Name</strong></h2>
-            <h3>
-                Please click button below to proceed to your Overview page.
-                @Html.ActionLink("Employee Overview", "Employee", "Overview")
-            </h3>
-        }
-    </div>
-    @*<table class="table table-condensed">
-        <thead class="thead-dark">
-            <tr>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Roles)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <span>
-                            <i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-                        </span>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Id" value="@Html.Raw(item.Id)" readonly />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="UserRole" value="@Html.Raw(item.Roles)" readonly />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="UserName" value="@Html.Raw(item.UserName)" readonly />
+                @*<h4>
+                        @Html.ActionLink("Continue", "Overview", "Employee", new { userId = @ViewBag.userId }, null)
+                    </h4>*@
+            </div>
+        </div>
+    }
 
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Email" value="@Html.Raw(item.Email)" readonly />
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
 </body>
 </html>
+
+<style>
+    .btn:hover {
+        background-color: #2e4593;
+        color: white;
+    }
+</style>
+<script>
+    function NewEmployeeEnrollment() {
+        window.location.href = "/Employee/EnrollmentSelection";
+
+    }
+</script>

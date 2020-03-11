@@ -1,12 +1,17 @@
 ﻿@model WatsonDB.Models.EmployeeAndInsuranceVM
 <!DOCTYPE html>
+
+@{ 
+    var Id = ViewBag.Employee_id;
+}
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Edit Authorization Form</title>
 </head>
 <body>
@@ -155,9 +160,20 @@
                                     <button id="EditAuthorizationFormUpdate" class="btn">Save</button>
                                 </div>
                             </div>
-                            <p>
-                                @Html.ActionLink("Back to Insurance", "GroupHealthEnrollment", new { Employee_id = ViewBag.Employee_id })
-                            </p>
+
+                            <form action="http://1mjmpqb/Reports2019/report/AuthorizationForm" Report&rs:Command="Render&Employee_id=@Id" method="post" target="_self">
+                                <INPUT type="hidden" name="rs:Command" value="Render">
+                                <INPUT type="hidden" name="rc:LinkTarget" value="main">
+                                <INPUT type="hidden" name="rs:Format" value="HTML4.0">
+                                <button type="submit" class="btn">Authorization Form</button>
+                                @Html.ActionLink("Back to Insurance", "GroupHealthEnrollment", "Group_Health", new { Employee_id = ViewBag.Employee_id }, null)
+                            </form>
+                            <p></p>
+                            <form action="~/Reports/AuthorizationFormPDF/">
+                                <input type="hidden" id="Employee_id" name="Employee_id" value="@Id" />
+                                <button type="submit" onclick="window.location.href = 'AuthorizationFormPDF';" class="btn">Download PDF</button>
+                            </form>
+                            <p></p>
                         </td>
                     </tr>
                 </table>

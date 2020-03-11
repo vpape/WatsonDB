@@ -15,7 +15,7 @@ namespace WatsonDB.Models
         public List<Family_Info> family { get; set; }
         public Beneficiary beneficiary { get; set; }
         public List<Beneficiary> benefiList { get; set; }
+        public AspNetUser user { get; set; }
 
-        
     }
 }

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Authorization Form</title>
 </head>
 <body>
@@ -80,20 +81,20 @@
                         <label style="padding-left: 10px;">
                             Name:
                         </label>
-                        <input type="text" id="PersonOneReleaseInfoTo" name="NameOfPersonOneReleaseInfoTo" value="@Html.DisplayFor(Model => Model.grpHealth.NameOfPersonOneReleaseInfoTo)" />
+                        <input type="text" id="PersonOneReleaseInfoTo" name="NameOfPersonOneReleaseInfoTo" value="@Html.DisplayFor(Model => Model.grpHealth.NameOfPersonOneReleaseInfoTo)" disabled/>
                         <label style="padding-left: 10px;">
                             Relationship:
                         </label>
-                        <input type="text" id="PersonOneRelationship" name="PersonOneRelationship" value="@Html.DisplayFor(Model => Model.grpHealth.PersonOneRelationship)" />
+                        <input type="text" id="PersonOneRelationship" name="PersonOneRelationship" value="@Html.DisplayFor(Model => Model.grpHealth.PersonOneRelationship)" disabled/>
                         <hr />
                         <label style="padding-left: 10px;">
                             Name:
                         </label>
-                        <input type="text" id="PersonTwoReleaseInfoTo" name="NameOfPersonTwoReleaseInfoTo" value="@Html.DisplayFor(Model => Model.grpHealth.NameOfPersonTwoReleaseInfoTo)" />
+                        <input type="text" id="PersonTwoReleaseInfoTo" name="NameOfPersonTwoReleaseInfoTo" value="@Html.DisplayFor(Model => Model.grpHealth.NameOfPersonTwoReleaseInfoTo)" disabled/>
                         <label style="padding-left: 10px;">
                             Relationship:
                         </label>
-                        <input type="text" id="PersonTwoRelationship" name="PersonTwoRelationship" value="@Html.DisplayFor(Model => Model.grpHealth.PersonTwoRelationship)" />
+                        <input type="text" id="PersonTwoRelationship" name="PersonTwoRelationship" value="@Html.DisplayFor(Model => Model.grpHealth.PersonTwoRelationship)" disabled/>
                     </div>
                 </div>
                 <p></p>
@@ -125,40 +126,40 @@
                                 <label style="padding-left: 10px;">
                                     Policyholder's Signature:
                                 </label>
-                                <input type="text" id="PolicyHolderSignature" name="AuthorizationFormPolicyHolderSignature" value="@Model.grpHealth.AuthorizationFormPolicyHolderSignature" />
+                                <input type="text" id="PolicyHolderSignature" name="AuthorizationFormPolicyHolderSignature" value="@Model.grpHealth.AuthorizationFormPolicyHolderSignature" disabled/>
                                 <label style="padding-left: 10px;">
                                     Date:
                                 </label>
-                                <input type="date" id="PolicyHolderSignatureDate" name="AuthorizationFormPolicyHolderSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonOneSignatureDate).ToString("yyyy-MM-dd")" />
+                                <input type="date" id="PolicyHolderSignatureDate" name="AuthorizationFormPolicyHolderSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonOneSignatureDate).ToString("yyyy-MM-dd")" disabled/>
                                 <hr />
                                 <label style="padding-left: 10px;">
                                     Signature of person to release information to:
                                 </label>
-                                <input type="text" id="PersonOneSignature" name="PersonOneSignature" value="@Html.DisplayFor(Model => Model.grpHealth.PersonOneSignature)" />
+                                <input type="text" id="PersonOneSignature" name="PersonOneSignature" value="@Html.DisplayFor(Model => Model.grpHealth.PersonOneSignature)" disabled/>
                                 <label style="padding-left: 10px;">
                                     Date:
                                 </label>
-                                <input type="date" id="PersonOneSignatureDate" name="PersonOneSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonOneSignatureDate).ToString("yyyy-MM-dd")" />
+                                <input type="date" id="PersonOneSignatureDate" name="PersonOneSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonOneSignatureDate).ToString("yyyy-MM-dd")" disabled/>
                                 <hr />
                                 <label style="padding-left: 10px;">
                                     Signature of person to release information to:
                                 </label>
-                                <input type="text" id="PersonTwoSignature" name="PersonTwoSignature" value="@Html.DisplayFor(Model => Model.grpHealth.PersonTwoSignature)" />
+                                <input type="text" id="PersonTwoSignature" name="PersonTwoSignature" value="@Html.DisplayFor(Model => Model.grpHealth.PersonTwoSignature)" disabled/>
                                 <label style="padding-left: 10px;">
                                     Date:
                                 </label>
-                                <input type="date" id="PersonTwoSignatureDate" name="PersonTwoSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonTwoSignatureDate).ToString("yyyy-MM-dd")" />
+                                <input type="date" id="PersonTwoSignatureDate" name="PersonTwoSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.PersonTwoSignatureDate).ToString("yyyy-MM-dd")" disabled/>
                             </div>
                             <hr />
                             <div class="form-group">
                                 <div class="col-md-offset-11">
-                                    <button id="AuthorizationFormUpdate" onclick="return redirect()" class="btn">Save</button>
+                                    <button id="AuthorizationFormUpdate" onclick="return redirect()" class="btn" disabled>Save</button>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">
                                     @Html.ActionLink("Edit", "EditAuthorizationForm", new { Employee_id = ViewBag.Employee_id, GroupHealthInsurance_id = ViewBag.GroupHealthInsurance_id }, null)|
-                                    @Html.ActionLink("Back to Insurance", "GrpHealthEnrollment", new { Employee_id = ViewBag.Employee_id })
+                                    @Html.ActionLink("Back to Insurance", "GroupHealthEnrollment", new { Employee_id = ViewBag.Employee_id })
                                 </div>
                             </div>
                         </td>

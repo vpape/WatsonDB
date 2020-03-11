@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Life Insurance Enrollment</title>
 </head>
 <body>
@@ -500,7 +501,7 @@
                 </table>
                 <hr />
                 <div class="col-md-3">
-                    <button type="submit" id="EditLifeIns" class="btn">Edit Life Ins.</button>
+                    <button type="button" id="EditLifeIns" class="btn">Edit Life Ins.</button>
                     <button type="button" onclick="AddBeneficiary()" class="btn">Add Beneficiary</button>
                 </div>
                 <table class="table table-condensed">
@@ -569,7 +570,7 @@
                     </div>
 
                 </div>
-                <button onclick="return EmpOverview()" class="btn">Employee Overview</button>
+                <button onclick="return EmpOverview()" class="btn">Overview</button>
             </div>
         </div>
     </div>
@@ -699,7 +700,7 @@
     }
 
     function EmpOverview() {
-        window.location.href = "/Employee/EmpOverview";
+        window.location.href = "/Employee/Overview";
     }
 
     document.querySelector("#EditLifeIns").addEventListener("click", function () {
@@ -715,7 +716,7 @@
         }
     })
 
-    document.querySelector("#LifeInsUpdate").addEventListener("click", function () {
+    @*document.querySelector("#LifeInsUpdate").addEventListener("click", function () {
         submitLifeIns = document.getElementById("LifeInsUpdate");
 
         var message
@@ -739,10 +740,10 @@
         else {
             if (alert == false) {
 
-                window.location.href = "/Employee/EmpOverview/?Employee_id=" + @ViewBag.Employee_id;
+                window.location.href = "/Employee/Overview/?Employee_id=" + @ViewBag.Employee_id;
             }
         }
-    })
+    })*@
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -887,16 +888,24 @@
                 "EmployeeSignature": EmployeeSignature,
                 "EmployeeSignatureDate": EmployeeSignatureDate,
             }
+
             var ret = postData('LifeInsEnrollmentNew', data)
                 .then(data => {
                     console.log(data);
-                    if (data != undefined) {
-
-                        FirstStep(data);
-                    }
-
+                    FirstStep(data);
                 })
                 .catch(error => console.error(error))
+
+            //var ret = postData('LifeInsEnrollmentNew', data)
+            //    .then(data => {
+            //        console.log(data);
+            //        if (data != undefined) {
+
+            //            FirstStep(data);
+            //        }
+
+            //    })
+            //    .catch(error => console.error(error))
         })
     })
 
@@ -906,7 +915,7 @@
             alert(emp.error);
         }
         else {
-            window.location.href = "/Life_Insurance/EditLifeInsurance/?Employee_id=@ViewBag.Employee_id";
+            @*window.location.href = "/Life_Insurance/EditLifeInsurance/?Employee_id=@ViewBag.Employee_id";*@
         }
 
         Employee_id = emp.data;

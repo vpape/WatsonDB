@@ -6,26 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Employee Enrollment</title>
 </head>
 <body>
+    <input type="hidden" id="userId" class="form-control" name="Id" value="@ViewBag.userId" />
     <div class="form-horizontal">
         <hr />
         <div class="collapsible" id="FirstStep">Employee Enrollment</div>
         <div id="divEmpEnrollment" class="content">
             <p></p>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Employee Role:</label>
-                <div class="col-md-10">
-                    <select id="Role" class="form-control" disabled>
-                        <option value="">Select Option</option>
-                        <option id="ManagerRole" value="Manager">Manger</option>
-                        <option id="EmployeeRole" value="Employee">Employee</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="form-group">
                 <label class="col-md-2 control-label">Hire Date:</label>
                 <div class="col-md-10">
@@ -160,7 +151,7 @@
             <div class="form-group">
                 <label for="EmailAddress" class="col-md-2 control-label">Email Address:</label>
                 <div class="col-md-10">
-                    <input type="text" id="EmailAddress" class="form-control" placeholder="Email" name="EmailAddress" value="" disabled />
+                    <input type="text" id="EmailAddress" class="form-control" placeholder="Email" name="EmailAddress" value="" />
                 </div>
             </div>
             <div class="form-group">
@@ -371,7 +362,7 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#EmployeeEnrollmentUpdate").addEventListener("click", function () {
-            Role = document.getElementById("Role").value;
+            userId = document.getElementById("userId").value;
             Active = document.getElementById("Active").value;
             Retired = document.getElementById("Retired").value;
             Cobra = document.getElementById("Cobra").value;
@@ -389,7 +380,7 @@
             CobraState = document.getElementById("Cobra").checked;
 
             var data = {
-                "Role": Role,
+                "userId": userId,
                 "Active": Active,
                 "Retired": Retired,
                 "Cobra": Cobra,

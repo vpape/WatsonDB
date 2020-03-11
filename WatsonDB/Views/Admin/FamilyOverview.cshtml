@@ -1,20 +1,19 @@
 ﻿@model List<WatsonDB.Family_Info>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Family Overview</title>
 </head>
 <body>
     <hr />
     <h4>Family Overview</h4>
-    <input type="hidden" id="RelationshipToInsured" class="form-control" name="RelationshipToInsured" value="@ViewBag.RelationshipToInsured" />
+    <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
     <table class="table table-condensed">
         <thead class="thead-dark">
             <tr>
@@ -45,7 +44,7 @@
                         <input type="text" id="LastName" class="form-control" name="LastName" value="@Html.Raw(item.LastName)" readonly />
                     </td>
                     <td>
-                        <input type="text" id="EmpNumber" class="form-control" name="SSN" value="@Html.Raw(item.Employee.SSN)" readonly />
+                        <input type="text" id="EmpNumber" class="form-control" name="SSN" value="@Html.Raw(item.Employee.EmployeeNumber)" readonly />
                     </td>
                     <td>
                         <input type="text" id="EmpFirstName" class="form-control" name="FirstName" value="@Html.Raw(item.Employee.FirstName)" readonly />

@@ -8,15 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
     <input type="hidden" id="FamilyMember_id" class="form-control" name="FamilyMember_id" value="@ViewBag.FamilyMember_id" />
     <input type="hidden" id="GroupHealthInsurance_id" class="form-control" name="GroupHealthInsurance_id" value="@ViewBag.GroupHealthInsurance_id" />
-    <input type="hidden" id="InsurancePlan_id" class="form-control" name="InsurancePlan_id" value="@ViewBag.InsurancePlan_id" />
-    @*<input type="hidden" id="InsurancePremium_id" class="form-control" name="InsurancePremium_id" value="@ViewBag.InsurancePremium_id" />*@
-    @*<<input type="hidden" id="InsurancePlanDetail_id" class="form-control" name="InsurancePlanDetail_id" value="@ViewBag.InsurancePlanDetail_id" />*@
     <div>
         <button onclick="return AuthorizationForm(@Model.employee.Employee_id)" class="btn">Authorization Form</button>
         <button onclick="return SalaryRedirection(@Model.employee.Employee_id)" class="btn">Salary Redirection Agreement</button>
@@ -748,8 +746,8 @@
                         <td>
                             <select class="form-control" id="NoMedicalGrpHealthOption" name="NoMedicalPlan" disabled>
                                 <option value="none" selected disabled hidden> Select an Option</option>
-                                <option value="none" @*@((Model.grpHealth.NoMedicalPlan) == "none" ? "selected" : "")*@></option>
-                                <option value="No Medical Plan">No Medical Plan</option>
+                                <option value="none" @((Model.grpHealth.NoMedicalPlan) == "none" ? "selected" : "")></option>
+                                <option value="No Medical Plan" @((Model.grpHealth.NoMedicalPlan) == "No Medical Plan" ? "selected" : "")>No Medical Plan</option>
                             </select>
                             <div id="NoMedicalOptionResult" hidden></div>
                         </td>
@@ -757,10 +755,10 @@
                             <select class="form-control" id="MECPlanGrpHealthOption" name="MECPlan" disabled>
                                 <option value="none" selected disabled hidden> Select an Option</option>
                                 <option value="none"></option>
-                                <option value="EO-MECPlan">Employee Only</option>
-                                <option value="ES-MECPlan">Employee & Spouse</option>
-                                <option value="EC-MECPlan">Employee & Child</option>
-                                <option value="EF-MECPlan">Employee & Family</option>
+                                <option value="EO-MECPlan" @((Model.grpHealth.MECPlan) == "EO-MECPlan" ? "selected" : "")>Employee Only</option>
+                                <option value="ES-MECPlan" @((Model.grpHealth.MECPlan) == "ES-MECPlan" ? "selected" : "")>Employee & Spouse</option>
+                                <option value="EC-MECPlan" @((Model.grpHealth.MECPlan) == "EC-MECPlan" ? "selected" : "")>Employee & Child</option>
+                                <option value="EF-MECPlan" @((Model.grpHealth.MECPlan) == "EF-MECPlan" ? "selected" : "")>Employee & Family</option>
                             </select>
                             <div id="MECPlanOptionResult" hidden></div>
                         </td>
@@ -768,10 +766,10 @@
                             <select class="form-control" id="StndPlanGrpHealthOption" name="StandardPlan" disabled>
                                 <option value="none" selected disabled hidden> Select an Option</option>
                                 <option value="none"></option>
-                                <option value="EO-StandardPlan">Employee Only</option>
-                                <option value="ES-StandardPlan">Employee & Spouse</option>
-                                <option value="EC-StandardPlan">Employee & Child</option>
-                                <option value="EF-StandardPlan">Employee & Family</option>
+                                <option value="EO-StandardPlan" @((Model.grpHealth.StandardPlan) == "EO-StandardPlan" ? "selected" : "")>Employee Only</option>
+                                <option value="ES-StandardPlan" @((Model.grpHealth.StandardPlan) == "ES-StandardPlan" ? "selected" : "")>Employee & Spouse</option>
+                                <option value="EC-StandardPlan" @((Model.grpHealth.StandardPlan) == "EC-StandardPlan" ? "selected" : "")>Employee & Child</option>
+                                <option value="EF-StandardPlan" @((Model.grpHealth.StandardPlan) == "EF-StandardPlan" ? "selected" : "")>Employee & Family</option>
                             </select>
                             <div id="StndPlanOptionResult" hidden></div>
                         </td>
@@ -779,10 +777,10 @@
                             <select class="form-control" id="BuyUpPlanGrpHealthOption" name="BuyUpPlan" disabled>
                                 <option value="none" selected disabled hidden> Select an Option</option>
                                 <option value="none"></option>
-                                <option value="EO-BuyUpPlan">Employee Only</option>
-                                <option value="ES-BuyUpPlan">Employee & Spouse</option>
-                                <option value="EC-BuyUpPlan">Employee & Child</option>
-                                <option value="EF-BuyUpPlan">Employee & Family</option>
+                                <option value="EO-BuyUpPlan" @((Model.grpHealth.BuyUpPlan) == "EO-BuyUpPlan" ? "selected" : "")>Employee Only</option>
+                                <option value="ES-BuyUpPlan" @((Model.grpHealth.BuyUpPlan) == "ES-BuyUpPlan" ? "selected" : "")>Employee & Spouse</option>
+                                <option value="EC-BuyUpPlan" @((Model.grpHealth.BuyUpPlan) == "EC-BuyUpPlan" ? "selected" : "")>Employee & Child</option>
+                                <option value="EF-BuyUpPlan" @((Model.grpHealth.BuyUpPlan) == "EF-BuyUpPlan" ? "selected" : "")>Employee & Family</option>
                             </select>
                             <div id="BuyUpPlanOptionResult" hidden></div>
                         </td>
@@ -877,21 +875,23 @@
                         <tr></tr>
                         <tr>
                             <td>
-                                <input type="text" class="form-control" id="spEmployerPhoneNumber" placeholder="Phone Number" value="@Html.Raw(Model.spouse.MailingAddress)" disabled />
+                                <input type="text" class="form-control" id="spEmployerPhoneNumber" placeholder="Phone Number" value="@Html.Raw(Model.spouse.EmployerPhoneNumber)" disabled />
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="" placeholder="" disabled />
                             </td>
                         </tr>
+
                         <tr>
                             <td style="padding-left: 20px;">
+                                <p></p>
                                 @*@Html.RadioButtonFor(model => model.Spouse, "true", true) Medical*@
                                 <input type="checkbox" class="checkbox-inline" id="Medical" name="Medical" value="True" @Html.Raw((Model.spouse.Medical == "True") ? "checked" : "") disabled />Medical
                                 @*@Html.RadioButtonFor(model => model.Spouse, "true", true) Dental*@
                                 <input type="checkbox" class="checkbox-inline" id="Dental" name="Dental" value="True" @Html.Raw((Model.spouse.Dental == "True") ? "checked" : "") disabled />Dental
-                                <p></p>
                             </td>
                             <td style="padding-left: 20px;">
+                                <p></p>
                                 @*@Html.RadioButtonFor(model => model.Spouse, "true", true) Vision*@
                                 <input type="checkbox" class="checkbox-inline" id="Vision" name="Vision" value="True" @Html.Raw((Model.spouse.Vision == "True") ? "checked" : "") disabled />Vision
                                 @*@Html.RadioButtonFor(model => model.Spouse, "true", true) Indemnity*@
@@ -1050,11 +1050,11 @@
                             <label style="padding-left: 10px;">
                                 Employee Signature:
                             </label>
-                            <input type="text" id="GrpHEnrollmentEmpSignature" name="GrpHEnrollmentEmpSignature" value="" disabled />
+                            <input type="text" id="GrpHEnrollmentEmpSignature" name="GrpHEnrollmentEmpSignature" value="@Html.Raw(Model.grpHealth.GrpHEnrollmentEmpSignature)" disabled />
                             <label style="padding-left: 10px;">
                                 Date:
                             </label>
-                            <input type="date" id="GrpHEnrollmentEmpSignatureDate" name="GrpHEnrollmentEmpSignatureDate" value="" disabled />
+                            <input type="date" id="GrpHEnrollmentEmpSignatureDate" name="GrpHEnrollmentEmpSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.GrpHEnrollmentEmpSignatureDate).ToString("yyyy-MM-dd")" disabled />
                         </div>
                     </td>
                 </tr>
@@ -1066,11 +1066,11 @@
                             <h4><b>Refusal of Group Health Coverage</b></h4>
                             <h6>This is to certify I have been given an opportunity to apply for group health coverage available to me through my Employer, and I have decided to not apply coverage for:</h6>
                             <div id="divGrpHRefusalSelection">
-                                <input type="checkbox" class="checkbox-inline" id="Myself" name="Myself" value="Myself" disabled />
+                                <input type="checkbox" class="checkbox-inline" id="Myself" name="Myself" value="Myself" @((Model.grpHealth.Myself == "True") ? "checked" : "") disabled />
                                 <label for="Myself">Myself</label>
-                                <input type="checkbox" class="checkbox-inline" id="Spouse" name="Spouse" value="Spouse" disabled />
+                                <input type="checkbox" class="checkbox-inline" id="Spouse" name="Spouse" value="Spouse" @((Model.grpHealth.Spouse == "True") ? "checked" : "") disabled />
                                 <label for="Spouse">Spouse</label>
-                                <input type="checkbox" class="checkbox-inline" id="Dependent" name="Dependent" value="Dependent" disabled />
+                                <input type="checkbox" class="checkbox-inline" id="Dependent" name="Dependent" value="Dependent" @((Model.grpHealth.Dependent == "True") ? "checked" : "") disabled />
                                 <label for="Dependent">Child(ren)</label>
                             </div>
                         </div>
@@ -1083,23 +1083,23 @@
                         <div id="divReasonForRefusal">
                             <h4><b>Reason for Refusal</b></h4>
                             <div id="divReasonForRefusalSelection">
-                                <input type="checkbox" id="OtherCoverageSelection" class="refusalcheckbox-inline" name="OtherCoverage" onclick="return showHideReasonForRefusal()" value="OtherCoverage" disabled />
+                                <input type="checkbox" id="OtherCoverageSelection" class="refusalcheckbox-inline" name="OtherCoverage" onclick="return showHideReasonForRefusal()" value="OtherCoverage" @((Model.grpHealth.OtherCoverage == "True") ? "checked" : "") disabled />
                                 <label for="OtherCoverageSelection">OtherCoverage</label>
-                                <input type="checkbox" id="OtherReasonSelection" class="refusalcheckbox-inline" name="OtherCoverage" onclick="return showHideReasonForRefusal()" value="OtherReason" disabled />
+                                <input type="checkbox" id="OtherReasonSelection" class="refusalcheckbox-inline" name="OtherCoverage" onclick="return showHideReasonForRefusal()" value="OtherReason" @((Model.grpHealth.OtherReason == "True") ? "checked" : "") disabled />
                                 <label for="OtherReasonSelection">OtherReason</label>
                                 <p></p>
-                                <input type="text" id="OtherReasonComment" class="form-control" placeholder="Please input other reason" name="ReasonForGrpCoverageRefusal" value="" disabled />
+                                <input type="text" id="OtherReasonComment" class="form-control" placeholder="Please input other reason" name="ReasonForGrpCoverageRefusal" value="@Html.Raw(Model.grpHealth.ReasonForGrpCoverageRefusal)" disabled />
                             </div>
                             <hr />
                             <div>
                                 <label style="padding-left: 10px;">
                                     Employee Signature:
                                 </label>
-                                <input type="text" id="GrpHRefusalEmpSignature" name="GrpHRefusalEmpSignature" value="" disabled />
+                                <input type="text" id="GrpHRefusalEmpSignature" name="GrpHRefusalEmpSignature" value="@Html.Raw(Model.grpHealth.GrpHRefusalEmpSignature)" disabled />
                                 <label style="padding-left: 10px;">
                                     Date:
                                 </label>
-                                <input type="date" id="GrpHRefusalEmpSignatureDate" name="GrpHRefusalEmpSignatureDate" value="" disabled />
+                                <input type="date" id="GrpHRefusalEmpSignatureDate" name="GrpHRefusalEmpSignatureDate" value="@Convert.ToDateTime(Model.grpHealth.GrpHRefusalEmpSignatureDate).ToString("yyyy-MM-dd")" disabled />
                             </div>
                         </div>
                     </td>
@@ -1129,7 +1129,7 @@
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.ActionLink("Edit Group Health", "EditGroupHealthIns", "Group_Health", new { Employee_id = ViewBag.Employee_id }, new { onclick = "EditGrpHealth()" })
-                    <button onclick="return EmpOverview()" class="btn">Employee Overview</button>
+                    @*<button onclick="return EmpOverview()" class="btn">Employee Overview</button>*@
                 </div>
             </div>
         </div>
@@ -1272,7 +1272,12 @@
 
     function GroupHealthInsurance() {
 
-       window.location.href = "/Group_Health/GrpHealthEnrollment?Employee_id=@Model.employee.Employee_id" + "&FamilyMember_id=@ViewBag.FamilyMember_id";
+       window.location.href = "/Group_Health/GroupHealthEnrollment?Employee_id=@Model.employee.Employee_id" + "&FamilyMember_id=@ViewBag.FamilyMember_id";
+    }
+
+    function EditGrpHealth() {
+
+        alert = confirm("To make changes to your Group Health Insurance policy. Please contact HR Manager, Lynetta Richards, at 575-397-2411 ext. 443");
     }
 
     function EditGroupHealthIns() {
@@ -1295,10 +1300,7 @@
         window.location.href = "/Life_Insurance/LifeInsuranceEnrollment?Employee_id=@Model.employee.Employee_id";
     }
 
-    function EditGrpHealth() {
 
-        alert = confirm("To make changes to your Group Health Insurance policy. Please contact HR Manager, Lynetta Richards, at 575-397-2411 ext. 443");
-    }
 
     function EmpOverview() {
         window.location.href = "/Employee/Overview";

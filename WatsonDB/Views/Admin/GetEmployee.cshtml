@@ -1,0 +1,144 @@
+﻿@model WatsonDB.Models.UserListViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Employee Overview</title>
+</head>
+<body>
+    <hr />
+    <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
+    <input type="hidden" id="userId" class="form-control" name="Id" value="@ViewBag.userId" />
+    <input type="hidden" id="FirstName" class="form-control" name="FirstName" value="@ViewBag.FirstName" />
+    <input type="hidden" id="LastName" class="form-control" name="LastName" value="@ViewBag.LastName" />
+    <h4>Overview</h4>
+    <table class="table table-condensed">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span>
+                        <i class="fa fa-arrow-circle-o-right" style="font-size:24px" onclick="FamilyOverview()"></i>
+                    </span>
+                </td>
+                <td>
+                    <input type="text" id="FirstName" class="form-control" name="FirstName" value="@Html.Raw(Model.emp.FirstName)" readonly />
+                </td>
+                <td>
+                    <input type="text" id="LastName" class="form-control" name="LastName" value="@Html.Raw(Model.emp.LastName)" readonly />
+                </td>
+                <td>
+                    <input type="text" id="EmailAddress" class="form-control" name="EmailAddress" value="@Html.Raw(Model.emp.EmailAddress)" readonly />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+<style>
+    .button {
+        text-align: right;
+    }
+
+    .btn:hover {
+        background-color: #2e4593;
+        color: white;
+    }
+
+    .next {
+        background-color: #2e4593;
+        padding-left: 1px;
+    }
+
+    .round {
+        border-radius: 50%;
+    }
+
+    a {
+        text-decoration: none;
+        display: inline-flex;
+        padding: 8px 8px;
+    }
+
+        a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+    .fa-arrow-circle-o-right:hover {
+        border-radius: 50%;
+        color: white;
+        background-color: #2e4593;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        table tr {
+            border-bottom: 1px solid black;
+        }
+</style>
+
+<script>
+    function NewEmployeeEnrollment() {
+        window.location.href = "/Employee/EnrollmentSelection";
+
+    }
+
+    function FamilyOverview() {
+        window.location.href = "/Employee/FamilyOverview?Employee_id=@ViewBag.Employee_id";
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("#GetEmployee").addEventListener("click", function () {
+            Employee_id = document.getElementById("Employee_id").value;
+            FirstName = document.getElementById("FirstName").value;
+            LastName = document.getElementById("LastName").value;
+            EmailAddress = document.getElementById("EmailAddress").value;
+
+            var data = {
+                "Employee_id": Employee_id,
+                "FirstName": FirstName,
+                "LastName": LastName,
+                "EmailAddress": EmailAddress
+            }
+
+            fetch('GetEmployee', {
+                body: JSON.stringify(data), //must match 'Content-Type' header
+                cache: 'no-cache', //*default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', //include, same-origin, *omit
+                headers: {
+                    'Accept': 'application/json',
+                    'user-agent': 'Mozilla/4.0 MDN Example',
+                    'content-type': 'application/json'
+                },
+                method: 'post', //*GET, POST, PUT, DELETE, etc...
+                mode: 'same-origin', //no-cors, cors, *same-origin
+                redirect: 'follow', //manual, *follow, error
+                referrer: 'no-referrer', //*client, no-referrer
+            }).then(res => res.json())
+                .then(response => FirstStep(response))
+                .catch(error => console.error('Error:', error));
+            //})
+
+        })
+    });
+
+</script>

@@ -73,6 +73,7 @@ namespace WatsonDB.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
+
             }
 
             // This doesn't count login failures towards account lockout
@@ -81,15 +82,24 @@ namespace WatsonDB.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Admin");                      
+                    }
+                //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Invalid Login Attempt.");
                     return View(model);
+
             }
         }
 
@@ -161,7 +171,7 @@ namespace WatsonDB.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     UserRole = model.UserRole,
-                    EmployeeNumber = model.EmployeeNumber
+                    EmployeeNumber = model.EmployeeNumber,
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -169,7 +179,7 @@ namespace WatsonDB.Controllers
                 {
                     if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("Overview", "Admin");
+                        return RedirectToAction("Index", "Admin", new { userId = user.Id});
                     }
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -183,7 +193,7 @@ namespace WatsonDB.Controllers
                     //Assign Role to user Here
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
 
-                    return RedirectToAction("Index", "Employee");
+                    return RedirectToAction("Index", "Employee", new { userId = user.Id });
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                   .ToList(), "Name", "Name");

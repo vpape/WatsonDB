@@ -1,4 +1,5 @@
-﻿@*@using Microsoft.AspNet.Identity.EntityFramework*@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li class="nav-item dropdown">
                         <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li>@Html.ActionLink("Parts", "OurTeam", "Home", new { area = "" }, null)</li>
-                            <li>@Html.ActionLink("Sales", "AboutUs", "Home", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Sales", "About", "Home", new { area = "" }, null)</li>
                         </ul>
                     </li>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -47,10 +49,13 @@
                             <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Manage
                             </a>
+                            <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
+                            <input type="hidden" id="userId" class="form-control" name="Id" value="@ViewBag.userId " />
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("Users", "ListUsers", "UsersAdmin", new { area = "" }, null)</li>
-                                <li>@Html.ActionLink("Roles", "ListRoles", "RolesAdmin", new { area = "" }, null)</li>
-                                <li>@Html.ActionLink("Overview", "Overview", "Admin", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("Users", "Index", "Admin", new { userId = User.Identity.GetUserId() }, null)</li>
+                                @*<li>@Html.ActionLink("Users", "ListUsers", "UsersAdmin", new { userId = User.Identity.GetUserId() }, null)</li>*@
+                                <li>@Html.ActionLink("Roles", "ListRoles", "RolesAdmin", new { userId = User.Identity.GetUserId() }, null)</li>
+                                <li>@Html.ActionLink("Employees", "Overview", "Admin", new { userId = User.Identity.GetUserId() }, null)</li>
                             </ul>
                         </li>
                     }
@@ -60,10 +65,13 @@
                             <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Overview
                             </a>
+                            <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
+                            <input type="hidden" id="userId" class="form-control" name="Id" value="@ViewBag.userId " />
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("Overview", "Overview", "Employee", new { area = "" }, null)</li>
-                                <li>@Html.ActionLink("Group Health Insurance", "GrpHealthEnrollment", "Group_Health", new { area = "" }, null)</li>
-                                <li>@Html.ActionLink("Life Insurance", "LifeInsuranceEnrollment", "Life_Insurance", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("User Info", "Index", "Employee", new { userId = ViewBag.userId }, null)</li>
+                                <li>@Html.ActionLink("Overview", "Overview", "Employee", new { userId = User.Identity.GetUserId() }, null)</li>
+                                <li>@Html.ActionLink("Group Health Insurance", "GroupHealthEnrollment", "Group_Health", new { userId = User.Identity.GetUserId() }@*new { area = "" }*@, null)</li>
+                                <li>@Html.ActionLink("Life Insurance", "LifeInsuranceEnrollment", "Life_Insurance", new { userId = User.Identity.GetUserId() }@*new { area = "" }*@, null)</li>
                             </ul>
                         </li>
                     }
@@ -75,10 +83,13 @@
                                 <a class="navbar-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Overview
                                 </a>
+                                <input type="hidden" id="Employee_id" class="form-control" name="Employee_id" value="@ViewBag.Employee_id" />
+                                <input type="hidden" id="userId" class="form-control" name="Id" value="@ViewBag.userId " />
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li>@Html.ActionLink("Overview", "Overview", "Employee", new { area = "" }, null)</li>
-                                    @*<li>@Html.ActionLink("Group Health Insurance", "GroupHealthEnrollment", "Group_Health", new { area = "" }, null)</li>*@
-                                    @*<li>@Html.ActionLink("Life Insurance", "LifeInsuranceEnrollment", "Life_Insurance", new { area = "" }, null)</li>*@
+                                    <li>@Html.ActionLink("User Info", "Index", "Employee", new { userId = ViewBag.userId }, null)</li>
+                                    <li>@Html.ActionLink("Overview", "Overview", "Employee", new { userId = User.Identity.GetUserId() }, null)</li>
+                                    <li>@Html.ActionLink("Group Health Insurance", "GroupHealthEnrollment", "Group_Health", new { userId = User.Identity.GetUserId() }, null)</li>
+                                    <li>@Html.ActionLink("Life Insurance", "LifeInsuranceEnrollment", "Life_Insurance", new { userId = User.Identity.GetUserId() }, null)</li>
                                 </ul>
                             </li>
                         }

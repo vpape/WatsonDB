@@ -1,13 +1,18 @@
 ﻿@model WatsonDB.Models.GroupHealthGrpHEnrollmentVM
 <h2></h2>
 <!DOCTYPE html>
+
+@{ 
+    var Id = ViewBag.Employee_id;
+}
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Edit Salary Redirection</title>
 </head>
 <body>
@@ -133,7 +138,7 @@
                                     @*<input type="text" class="form-control" id="MedicalInsProvider" name="MedicalInsProvider" value="Insurance Mgmt. Service" readonly />*@
                                     <select id="MedicalInsProvider" name="MedicalInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.MedicalInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.MedicalInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.MedicalInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.MedicalInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.MedicalInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -195,7 +200,7 @@
                                     @*<input type="text" class="form-control" id="DentalInsProvider" name="DentalInsProvider" value="Guardian Life Ins." readonly />*@
                                     <select id="DentalInsProvider" name="DentalInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.DentalInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.DentalInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.DentalInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.DentalInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.DentalInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -209,7 +214,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxDentalIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxDentalIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxDentalIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxDentalIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxDentalIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxDentalIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -223,7 +228,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxDentalIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxDentalIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxDentalIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxDentalIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxDentalIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxDentalIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -239,7 +244,7 @@
                                     @*<input type="text" class="form-control" id="VisionInsProvider" name="VisionInsProvider" value="Guardian Life Ins." readonly />*@
                                     <select id="VisionInsProvider" name="VisionInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.VisionInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.VisionInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.VisionInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.VisionInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.VisionInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -253,7 +258,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxVisionIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxVisionIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxVisionIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxVisionIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxVisionIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxVisionIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -267,7 +272,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxVisionIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxVisionIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxVisionIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxVisionIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxVisionIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxVisionIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -283,7 +288,7 @@
                                     @*<input type="text" class="form-control" id="StDisabilityProvider" name="StDisabilityProvider" value="@Html.DisplayFor(Model => Model.deduction.StDisabilityProvider)" />*@
                                     <select id="StDisabilityProvider" name="StDisabilityProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.StDisabilityProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.StDisabilityProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.StDisabilityProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.StDisabilityProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.StDisabilityProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -297,7 +302,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxStDisability) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxStDisability) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxStDisability) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxStDisability) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxStDisability) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxStDisability) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -311,7 +316,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxStDisability) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxStDisability) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxStDisability) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxStDisability) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxStDisability) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxStDisability) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -327,7 +332,7 @@
                                     @*<input type="text" class="form-control" id="HospitalIndemProvider" name="HospitalIndemProvider" value="@Html.DisplayFor(Model => Model.deduction.HospitalIndemProvider)" />*@
                                     <select id="HospitalIndemProvider" name="HospitalIndemProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.HospitalIndemProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.HospitalIndemProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.HospitalIndemProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.HospitalIndemProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.HospitalIndemProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -341,7 +346,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxHospitalIndem) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -355,7 +360,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxHospitalIndem) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -371,7 +376,7 @@
                                     @*<input type="text" class="form-control" id="TermLifeInsProvider" name="TermLifeInsProvider" value="@Html.DisplayFor(Model => Model.deduction.TermLifeInsProvider)" />*@
                                     <select id="TermLifeInsProvider" name="TermLifeInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.TermLifeInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.TermLifeInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.TermLifeInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.TermLifeInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.TermLifeInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -385,7 +390,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxTermLifeIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -399,7 +404,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxTermLifeIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -415,7 +420,7 @@
                                     @*<input type="text" class="form-control" id="WholeLifeInsProvider" name="WholeLifeInsProvider" value="@Html.DisplayFor(Model => Model.deduction.WholeLifeInsProvider)" />*@
                                     <select id="WholeLifeInsProvider" name="WholeLifeInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.WholeLifeInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.WholeLifeInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.WholeLifeInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.WholeLifeInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.WholeLifeInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -429,7 +434,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxWholeLifeIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -443,7 +448,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxWholeLifeIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -458,14 +463,14 @@
                                 <td>
                                     <input type="text" class="form-control" id="AccidentProvider" name="AccidentProvider" value="@Html.DisplayFor(Model => Model.deduction.AccidentProvider)" />
                                     @*<select id="AccidentProvider" class="form-control">
-                                            <option value=""></option>
-                                            <option value="Insurance Mgmt. Service" @((Model.deduction.AccidentProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
-                                            <option value="Guardian Life Ins." @((Model.deduction.AccidentProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
-                                            <option value="AFLAC Ins." @((Model.deduction.AccidentProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
-                                            <option value="Colonial Life Ins." @((Model.deduction.AccidentProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
-                                            <option value="New York Life Ins." @((Model.deduction.AccidentProvider) == "New York Life Ins." ? "selected" : "")>New York Life Ins.</option>
-                                        </select>*@
-                                    <div id="AccidentInsOptionResult" hidden></div>
+                                        <option value=""></option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.AccidentProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Guardian Life Ins." @((Model.deduction.AccidentProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
+                                        <option value="AFLAC Ins." @((Model.deduction.AccidentProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
+                                        <option value="Colonial Life Ins." @((Model.deduction.AccidentProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
+                                        <option value="New York Life Ins." @((Model.deduction.AccidentProvider) == "New York Life Ins." ? "selected" : "")>New York Life Ins.</option>
+                                    </select>*@
+                                        <div id="AccidentInsOptionResult" hidden></div>
 
                                 </td>
                                 <td>
@@ -475,7 +480,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxAccidentIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxAccidentIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxAccidentIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxAccidentIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxAccidentIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxAccidentIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -489,7 +494,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxAccidentIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxAccidentIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxAccidentIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxAccidentIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxAccidentIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxAccidentIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -504,13 +509,13 @@
                                 <td>
                                     <input type="text" class="form-control" id="CancerProvider" name="CancerProvider" value="@Html.DisplayFor(Model => Model.deduction.CancerProvider)" />
                                     @*<select id="CancerProvider" class="form-control">
-                                            <option value=""></option>
-                                            <option value="Insurance Mgmt. Service" @((Model.deduction.CancerProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
-                                            <option value="Guardian Life Ins." @((Model.deduction.CancerProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
-                                            <option value="AFLAC Ins." @((Model.deduction.CancerProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
-                                            <option value="Colonial Life Ins." @((Model.deduction.CancerProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
-                                            <option value="New York Life Ins." @((Model.deduction.CancerProvider) == "New York Life Ins." ? "selected" : "")>New York Life Ins.</option>
-                                        </select>*@
+                                        <option value=""></option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.CancerProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Serv.</option>
+                                        <option value="Guardian Life Ins." @((Model.deduction.CancerProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
+                                        <option value="AFLAC Ins." @((Model.deduction.CancerProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
+                                        <option value="Colonial Life Ins." @((Model.deduction.CancerProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
+                                        <option value="New York Life Ins." @((Model.deduction.CancerProvider) == "New York Life Ins." ? "selected" : "")>New York Life Ins.</option>
+                                    </select>*@
                                     <div id="CancerInsOptionResult" hidden></div>
                                 </td>
                                 <td>
@@ -520,7 +525,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxCancerIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxCancerIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxCancerIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxCancerIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxCancerIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxCancerIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -534,7 +539,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxCancerIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxCancerIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxCancerIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxCancerIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxCancerIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxCancerIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -550,7 +555,7 @@
                                     @*<input type="text" class="form-control" id="OtherInsProvider" name="OtherInsProvider" value="@Html.DisplayFor(Model => Model.deduction.OtherInsProvider)" />*@
                                     <select id="OtherInsProvider" name="OtherInsProvider" class="form-control">
                                         <option value=""></option>
-                                        <option value="Insurance Mgmt. Service" @((Model.deduction.OtherInsProvider) == "Insurance Mgmt. Service" ? "selected" : "")>Insurance Mgmt. Service</option>
+                                        <option value="Insurance Mgmt. Serv." @((Model.deduction.OtherInsProvider) == "Insurance Mgmt. Serv." ? "selected" : "")>Insurance Mgmt. Service</option>
                                         <option value="Guardian Life Ins." @((Model.deduction.OtherInsProvider) == "Guardian Life Ins." ? "selected" : "")>Guardian Life Ins.</option>
                                         <option value="AFLAC Ins." @((Model.deduction.OtherInsProvider) == "AFLAC Ins." ? "selected" : "")>AFLAC Ins.</option>
                                         <option value="Colonial Life Ins." @((Model.deduction.OtherInsProvider) == "Colonial Life Ins." ? "selected" : "")>Colonial Life Ins.</option>
@@ -564,7 +569,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPreTaxOtherIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPreTaxOtherIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPreTaxOtherIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPreTaxOtherIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPreTaxOtherIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPreTaxOtherIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -578,7 +583,7 @@
                                         <option value="Employee & Spouse" @((Model.deduction.EEelectionPostTaxOtherIns) == "Employee & Spouse" ? "selected" : "")>Employee & Spouse</option>
                                         <option value="Employee & Child" @((Model.deduction.EEelectionPostTaxOtherIns) == "Employee & Child" ? "selected" : "")>Employee & Child</option>
                                         <option value="Employee & Family" @((Model.deduction.EEelectionPostTaxOtherIns) == "Employee & Family" ? "selected" : "")>Employee & Family</option>
-                                        <option value="Covered By Other Insurance" @((Model.deduction.EEelectionPostTaxOtherIns) == "Covered By Other Insurance" ? "selected" : "")>Covered By Other Insurance</option>
+                                        <option value="Covered By Other Ins." @((Model.deduction.EEelectionPostTaxOtherIns) == "Covered By Other Ins." ? "selected" : "")>Covered By Other Insurance</option>
                                         <option value="Not Interested" @((Model.deduction.EEelectionPostTaxOtherIns) == "Not Interested" ? "selected" : "")>Not Interested</option>
                                     </select>
                                 </td>
@@ -654,8 +659,13 @@
                     </td>
                 </tr>
             </table>
-            <p>
+            <form action="/Reports/SalaryRedirectionForm/">
+                <input type="hidden" id="Employee_id" name="Employee_id" value="@Id"/>
                 @Html.ActionLink("Back to Insurance", "GroupHealthEnrollment", new { Employee_id = ViewBag.Employee_id }, null)
+                <button type="submit" onclick="window.location.href= 'SalaryRedirectionForm'" class="btn">Download PDF</button>
+            </form>
+            <p>
+               
             </p>
         </div>
     </div>

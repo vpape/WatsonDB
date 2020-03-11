@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Employee Detail</title>
 </head>
 <body>
@@ -18,18 +19,6 @@
             <p></p>
             <p></p>
             <dl class="dl-horizontal">
-                <dt>
-                    <label class="col-md-2 control-label">Employee Role:</label>
-                </dt>
-                <dd class="col-md-10 form-group">
-                    <input type="text" id="Role" class="form-control" name="UserRole" value="@Html.Raw(Model.employee.UserRole)" disabled>
-                </dd>
-                <dt>
-                    <label class="col-md-2 control-label">Employee Number:</label>
-                </dt>
-                <dd class="col-md-10 form-group">
-                    <input type="text" id="EmployeeNumber" class="form-control" name="EmployeeNumber" value="@Html.Raw(Model.employee.EmployeeNumber)" disabled>
-                </dd>
                 <dt>
                     <label class="col-md-2 control-label">Current Employer:</label>
                 </dt>
@@ -185,25 +174,25 @@
                 </dt>
                 <dd class="col-md-10 form-group">
                     @*@Html.RadioButtonFor(model => model.Gender, "Male", true) Male @Html.RadioButtonFor(model => model.Gender, "female", false) Female*@
-                    @*<input type="text" id="empOtherGrpHinsCoverage" class="form-control" name="CoveredByOtherInsurance" value="@Html.Raw(Model.grpHealth.OtherInsuranceCoverage)" disabled>*@
+                    <input type="text" id="empOtherGrpHinsCoverage" class="form-control" name="CoveredByOtherInsurance" value="@Html.Raw(Model.grpHealth.OtherInsuranceCoverage)" disabled>
                 </dd>
                 <dt>
                     <label class="col-md-2 control-label">Insurance Carrier:</label>
                 </dt>
                 <dd class="col-md-10 form-group">
-                    @*<input type="text" id="empInsCarrier" class="form-control" name="InsuranceCarrier" value="@Html.Raw(Model.grpHealth.InsuranceCarrier)" disabled>*@
+                    <input type="text" id="empInsCarrier" class="form-control" name="InsuranceCarrier" value="@Html.Raw(Model.grpHealth.InsuranceCarrier)" disabled>
                 </dd>
                 <dt>
                     <label class="col-md-2 control-label">Policy Number:</label>
                 </dt>
                 <dd class="col-md-10 form-group">
-                    @*<input type="tel" id="empInsPolicyNumber" class="form-control" name="PolicyNumber" value="@Html.Raw(Model.grpHealth.PolicyNumber)" disabled>*@
+                    <input type="tel" id="empInsPolicyNumber" class="form-control" name="PolicyNumber" value="@Html.Raw(Model.grpHealth.PolicyNumber)" disabled>
                 </dd>
                 <dt>
                     <label class="col-md-2 control-label">Phone Number:</label>
                 </dt>
                 <dd class="col-md-10 form-group">
-                    @*<input type="tel" id="empInsPhoneNumber" class="form-control" name="PhoneNumber" value="@Html.Raw(Model.grpHealth.PhoneNumber)" disabled>*@
+                    <input type="tel" id="empInsPhoneNumber" class="form-control" name="PhoneNumber" value="@Html.Raw(Model.grpHealth.PhoneNumber)" disabled>
                 </dd>
                 <dt>
                     @Html.ActionLink("Edit", "EditEmployee", "Employee", new { Employee_id = Model.employee.Employee_id }, null)|

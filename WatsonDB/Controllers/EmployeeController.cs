@@ -27,11 +27,11 @@ using WatsonDB.Models;
 
 namespace WatsonDB.Controllers
 {
-    //[Authorize(Roles = "Employee, Manager")]
+    //[Authorize(Roles = "Employee, Manager, Owner, Admin")]
     public class EmployeeController : Controller
     {
         private WatsonDBContext db = new WatsonDBContext();
-        private static List<Employee> employee = new List<Employee>();
+        private static Employee employee = new Employee();
         private static List<Family_Info> family = new List<Family_Info>();
         private static List<Other_Insurance> otherins = new List<Other_Insurance>();
 
@@ -41,16 +41,29 @@ namespace WatsonDB.Controllers
             context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string userId, string userName)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            userId = userId ?? User.Identity.GetUserId();
+            userName = userName ?? User.Identity.GetUserName();
+            ViewBag.userName = userName;
+
             if (User.Identity.IsAuthenticated)
             {
                 var user = User.Identity;
+
                 ViewBag.Name = user.Name;
+                ViewBag.userId = userId;
+      
+                ViewBag.Email = currentUser.Email;
+                ViewBag.UserRole = currentUser.UserRole;
+                ViewBag.EmployeeNumber = currentUser.EmployeeNumber;
 
                 ViewBag.displayMenu = "No";
 
-                if (isAdminUser())
+                if (isUser())
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -58,35 +71,27 @@ namespace WatsonDB.Controllers
             }
             else
             {
-                ViewBag.Name = "Not Logged IN";
+                if (User.Identity.IsAuthenticated)
+                {
+                    var user = User.Identity;
+                    ViewBag.Name = user.Name;
+
+                    if (!isUser())
+                    {
+                        return RedirectToAction("Index", "Employee");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Employee");
+                }
             }
+
             return View();
 
         }
 
-        //public ActionResult Index()
-        //{
-
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        var user = User.Identity;
-        //        ViewBag.Name = user.Name;
-
-        //        if (!isAdminUser())
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    var roles = context.Roles.ToList();
-        //    return View(roles);
-        //}
-
-        public bool isAdminUser()
+        public bool isUser()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -94,7 +99,15 @@ namespace WatsonDB.Controllers
                 ApplicationDbContext context = new ApplicationDbContext();
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin")
+                if (s[0].ToString() == "Employee")
+                {
+                    return true;
+                }
+                else if (s[0].ToString() == "Manager")
+                {
+                    return true;
+                }
+                else if (s[0].ToString() == "Owner")
                 {
                     return true;
                 }
@@ -106,29 +119,38 @@ namespace WatsonDB.Controllers
             return false;
         }
 
-
-
-        //EmpOverview
-        public ActionResult Overview(int? Employee_id)
+        //Overview
+        public ActionResult Overview(int? Employee_id, string userId)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
 
-            //var family_Infoes = db.Family_Infoes.Include(f => f.Employee).Where(f => f.Employee_id == id);
+            userId = userId ?? User.Identity.GetUserId();
 
-            Employee employee = db.Employees.Where(i => i.Employee_id == Employee_id).FirstOrDefault();
-            if (Employee_id == null)
+            ViewBag.userId = userId;
+            ViewBag.EmployeeNumber = currentUser.EmployeeNumber;
+            ViewBag.Email = currentUser.Email;
+
+            //Employee employee = db.Employees.Where(i => i.Employee_id == Employee_id).FirstOrDefault();
+
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            ViewBag.FirstName = employee.FirstName;
+            ViewBag.LastName = employee.LastName;
+
+            Employee_id = employee.Employee_id;
+
+            if (Employee_id != null)
             {
-                //return View(db.Employees.Find(Employee_id));
-                return View(db.Employees.ToList());
+                Employee employee = new Employee();
 
+                return View(employee);
             }
             else
             {
-                return View(db.Employees.Find(Employee_id));
-                //return View(db.Employees.ToList());
+                return RedirectToAction("Index", "Employee", new { userId });
             }
         }
-
-
         //----------------------------------------------------------------------------------------
 
         public ActionResult EnrollmentSelection()
@@ -136,19 +158,21 @@ namespace WatsonDB.Controllers
             return View();
         }
 
-        public ActionResult CreateEmployee()
+        public ActionResult CreateEmployee(string userId)
         {
+            userId = userId ?? User.Identity.GetUserId();
+            ViewBag.userId = userId;
+
             return View();
         }
 
         //Create-EmpEnrollment
-        public JsonResult CreateEmployeeNew(string Role, string EmployeeNumber, string CurrentEmployer, string JobTitle, string SSN, DateTime HireDate,
+        public JsonResult CreateEmployeeNew(string userId, string EmployeeNumber, string CurrentEmployer, string JobTitle, string SSN, DateTime HireDate,
             string MaritalStatus, string FirstName, string LastName, DateTime DateOfBirth, string Gender, string Active, string Retired, string CobraState)
         {
             Employee e = new Employee();
 
-            //e.Id = Id;
-            e.UserRole = Role;
+            e.Id = userId;
             e.CurrentEmployer = CurrentEmployer;
             e.JobTitle = JobTitle;
             e.SSN = SSN;
@@ -163,6 +187,7 @@ namespace WatsonDB.Controllers
             e.CobraStateContinuation = CobraState;
 
             ViewBag.Employee_id = e.Employee_id;
+            e.DateOfBirth = DateTime.Now.Date;
 
             db.Employees.Add(e);
             db.SaveChanges();
@@ -196,39 +221,6 @@ namespace WatsonDB.Controllers
             e.CellPhone = CellPhone;
 
             ViewBag.Employee_id = e.Employee_id;
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    db.SaveChanges();
-
-                    if (e.MaritalStatus == "Married")
-                    {
-                        RedirectToAction("SpouseEnrollment", "Employee", new { e.Employee_id, e.MaritalStatus });
-                        RedirectToAction("SpouseEnrollment");
-                    }
-                    else if (e.MaritalStatus == "MarriedwDep")
-                    {
-                        RedirectToAction("SpouseEnrollment", new { e.Employee_id, e.MaritalStatus });
-                        RedirectToAction("SpouseEnrollment", "Employee", new { e.Employee_id, e.MaritalStatus });
-                    }
-                    else if (e.MaritalStatus == "SinglewDep")
-                    {
-                        RedirectToAction("SpouseEnrollment", "Employee");
-                        RedirectToAction("DependentEnrollment", "Employee", new { e.Employee_id, e.MaritalStatus });
-                    }
-                    else
-                    {
-                        RedirectToAction("EnrollmentSelection", "Employee", new { e.Employee_id, e.MaritalStatus });
-                    }
-                }
-
-                catch (Exception emp)
-                {
-                    Console.WriteLine(emp);
-                }
-            }
 
             int result = e.Employee_id;
 
@@ -264,8 +256,6 @@ namespace WatsonDB.Controllers
             employeeAndInsuranceVM.employee = db.Employees.FirstOrDefault(i => i.Employee_id == Employee_id);
             employeeAndInsuranceVM.grpHealth = db.Group_Health.FirstOrDefault(i => i.Employee_id == Employee_id);
 
-            //ViewBag.MaritalStatus = employeeAndInsuranceVM.employee.MaritalStatus;
-
             if (Employee_id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -284,7 +274,7 @@ namespace WatsonDB.Controllers
         }
 
         //EditUpdate-Emp
-        public JsonResult EmployeeEditUpdate(int? Employee_id, string EmpRole, string EmployeeNumber, string CurrentEmployer, string JobTitle, string SSN,
+        public JsonResult EmployeeEditUpdate(int? Employee_id, string CurrentEmployer, string JobTitle, string SSN,
             DateTime? HireDate, string FirstName, string LastName, DateTime? DateOfBirth, string Gender, string MaritalStatus, string MailingAddress, string PObox,
             string City, string State, string ZipCode, string County, string PhysicalAddress, string City2, string State2, string ZipCode2, string CityLimits,
             string EmailAddress, string PhoneNumber, string CellPhone, string OtherGrpHinsCoverage, string InsCarrier, string InsPolicyNumber,
@@ -295,7 +285,6 @@ namespace WatsonDB.Controllers
                 .Single();
 
             //e.Id = Id;
-            e.UserRole = EmpRole;
             e.CurrentEmployer = CurrentEmployer;
             e.JobTitle = JobTitle;
             e.SSN = SSN;
@@ -323,6 +312,8 @@ namespace WatsonDB.Controllers
             e.Retired = Retired;
             e.CobraStateContinuation = CobraState;
 
+            e.HireDate = DateTime.Now.Date;
+            e.DateOfBirth = DateTime.Now.Date;
 
             var grph = db.Group_Health
               .Where(i => i.Employee_id == Employee_id)
@@ -361,8 +352,15 @@ namespace WatsonDB.Controllers
         }
 
         //Get-EmpDetail
-        public ActionResult EmployeeDetail(int? Employee_id)
+        public ActionResult EmployeeDetail(int? Employee_id, string userId)
         {
+            userId = userId ?? User.Identity.GetUserId();
+
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            Employee_id = employee.Employee_id;
+            ViewBag.Employee_id = Employee_id;
+
             EmployeeAndInsuranceVM employeeAndInsuranceVM = new EmployeeAndInsuranceVM();
 
             employeeAndInsuranceVM.employee = db.Employees.FirstOrDefault(i => i.Employee_id == Employee_id);
@@ -430,10 +428,15 @@ namespace WatsonDB.Controllers
 
         //----------------------------------------------------------------------------------------
 
-        public ActionResult FamilyOverview(int? Employee_id, int? FamilyMember_id)
+        public ActionResult FamilyOverview(int? Employee_id, int? FamilyMember_id, string userId)
         {
-            ViewBag.Employee_id = Employee_id;
-            ViewBag.FamilyMember_id = FamilyMember_id;
+            userId = userId ?? User.Identity.GetUserId();
+
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            Employee_id = employee.Employee_id;
+
+            ViewBag.Employee_id = employee.Employee_id;
 
             var familyInfo = (from fi in db.Family_Info
                               where fi.Employee_id == Employee_id
@@ -497,6 +500,8 @@ namespace WatsonDB.Controllers
             sp.LastName = LastName;
             sp.DateOfBirth = DateOfBirth;
             sp.Gender = Gender;
+
+            sp.DateOfBirth = DateTime.Now.Date;
 
             db.Family_Info.Add(sp);
             db.SaveChanges();
@@ -672,6 +677,8 @@ namespace WatsonDB.Controllers
             sp.EmployerZipCode = EmployerZipCode;
             sp.EmployerPhoneNumber = EmployerPhoneNumber;
 
+            sp.DateOfBirth = DateTime.Now.Date;
+
             sp.OtherInsuranceCoverage = spOtherInsurance;
             sp.Medical = spOtherMedicalCoverage;
             sp.Dental = spOtherDentalCoverage;
@@ -716,8 +723,6 @@ namespace WatsonDB.Controllers
         //Get-SpDetail
         public ActionResult SpouseDetail(int? Employee_id, int? FamilyMember_id, string MaritalStatus)
         {
-            //ViewBag.spouseExist = !(MaritalStatus == "Single" || MaritalStatus == "SinglewDep");
-
             SpouseAndDependentInsVM spAndDepInsVM = new SpouseAndDependentInsVM();
 
             spAndDepInsVM.family = db.Family_Info.FirstOrDefault(i => i.FamilyMember_id == FamilyMember_id);
@@ -829,6 +834,8 @@ namespace WatsonDB.Controllers
             dep.NonStandardDependent = NonStandardDependent;
             dep.AddDropDepLifeIns = AddDropDepLifeIns;
 
+            dep.DateOfBirth = DateTime.Now.Date;
+
             db.Family_Info.Add(dep);
             db.SaveChanges();
 
@@ -910,6 +917,8 @@ namespace WatsonDB.Controllers
             dep.Disabled = Disabled;
             dep.NonStandardDependent = NonStandardDependent;
             dep.AddDropDepLifeIns = AddDropDepLifeIns;
+
+            dep.DateOfBirth = DateTime.Now.Date;
 
             var emp = new Employee()
             {

@@ -28,6 +28,7 @@ using WatsonDB.Models;
 
 namespace WatsonDB.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -51,52 +52,10 @@ namespace WatsonDB.Controllers
         // GET: Index 
         //==================================== 
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         public ActionResult Index()
         {
+            return View(userManager.Users);
 
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                ViewBag.Name = user.Name;
-
-                ViewBag.displayMenu = "No";
-
-                if (isAdminUser())
-                {
-                    ViewBag.displayMenu = "Yes";
-                }
-                return View();
-            }
-            else
-            {
-                ViewBag.Name = "Not Logged IN";
-            }
-            return View();
-        }
-
-        public bool isAdminUser()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                var s = userManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
         }
 
         //====================================
@@ -105,9 +64,7 @@ namespace WatsonDB.Controllers
         [HttpGet]
         public ActionResult ListUsers()
         {
-            var users = userManager.Users;
-
-            return View(users);
+            return View(userManager.Users);
         }
 
         //====================================
@@ -122,7 +79,7 @@ namespace WatsonDB.Controllers
         }
 
         //====================================
-        // Post: AdminUsers/CreateUser -take a closer look for UserRoleVM
+        // Post: AdminUsers/CreateUser
         //==================================== 
         [HttpPost]
         public async Task<ActionResult> CreateUser(RegisterViewModel model, params string[] selectedRoles)
@@ -131,7 +88,7 @@ namespace WatsonDB.Controllers
             {
                 ApplicationUser applicationUser = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email
                 };
 
@@ -163,7 +120,7 @@ namespace WatsonDB.Controllers
             }
             ViewBag.RoleId = new SelectList(roleManager.Roles, "Name", "Name");
 
-            return View();
+            return View(model);
         }
 
         //====================================

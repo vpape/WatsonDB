@@ -27,6 +27,7 @@ using WatsonDB.Models;
 
 namespace WatsonDB.Controllers
 {
+    //[Authorize(Roles = "Employee, Manager, Owner, Admin")]
     public class Life_InsuranceController : Controller
     {
         private WatsonDBContext db = new WatsonDBContext();
@@ -41,10 +42,15 @@ namespace WatsonDB.Controllers
             return View();
         }
 
-        public ActionResult LifeInsuranceEnrollment(int? LifeInsurance_id, int? Employee_id, int? Beneficiary_id, string Message)
+        public ActionResult LifeInsuranceEnrollment(int? LifeInsurance_id, int? Employee_id, int? Beneficiary_id, string Message, string userId)
         {
-            ViewBag.LifeInsurance_id = LifeInsurance_id;
+            userId = userId ?? User.Identity.GetUserId();
+            employee = db.Employees.Where(i => i.Id == userId).FirstOrDefault();
+
+            Employee_id = employee.Employee_id;
+
             ViewBag.Employee_id = Employee_id;
+     
             ViewBag.Beneficiary_id = Beneficiary_id;
             ViewBag.Message = Message;
 

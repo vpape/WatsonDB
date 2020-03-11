@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    @*<script src="https://kit.fontawesome.com/2987c70fa3.js" crossorigin="anonymous"></script>*@
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Add Dependent</title>
 </head>
 <body>
@@ -243,7 +244,7 @@
         if (save) {
             if (alert == true) {
 
-                message = "Please click OK to proceed to the Group Health Enrollment page, otherwise click cancel to return to Family Overview page. Thank you!!";
+                message = "Please click OK to proceed to the Group Health Enrollment page, otherwise click cancel to return to Employee Overview page. Thank you!!";
                 var alert = confirm(message)
                 if (alert == true) {
 
@@ -252,7 +253,7 @@
                 }
                 else {
                     message = "Returning back to Family Overview. Thank you!!"
-                    window.location.href = "/Employee/FamilyOverview/?Employee_id=" + @ViewBag.Employee_id;
+                    window.location.href = "/Employee/Overview/?Employee_id=" + @ViewBag.Employee_id;
                 }
 
             }

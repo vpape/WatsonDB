@@ -1,5 +1,10 @@
 ﻿@model WatsonDB.Models.EmployeeAndInsuranceVM
 <!DOCTYPE html>
+@{ 
+    var Id = ViewBag.Id;
+    var EmployeeNumber = ViewBag.EmployeeNumber;
+    var UserRole = ViewBag.UserRole;
+}
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,22 +15,14 @@
     <title>Employee Enrollment</title>
 </head>
 <body>
+    <input type="hidden" id="Id" class="form-control" name="Id" value="@Id" />
+    <input type="hidden" id="EmployeeNumber" class="form-control" name="EmployeeNumber" value="@EmployeeNumber" />
+    <input type="hidden" id="UserRole" class="form-control" name="UserRole" value="@UserRole" />
     <div class="form-horizontal">
         <hr />
         <div class="collapsible" id="FirstStep">Employee Enrollment</div>
         <div id="divEmpEnrollment" class="content">
             <p></p>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Employee Role:</label>
-                <div class="col-md-10">
-                    <select id="Role" class="form-control" disabled>
-                        <option value="">Select Option</option>
-                        <option id="ManagerRole" value="Manager">Manger</option>
-                        <option id="EmployeeRole" value="Employee">Employee</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="form-group">
                 <label class="col-md-2 control-label">Hire Date:</label>
                 <div class="col-md-10">
@@ -160,7 +157,7 @@
             <div class="form-group">
                 <label for="EmailAddress" class="col-md-2 control-label">Email Address:</label>
                 <div class="col-md-10">
-                    <input type="text" id="EmailAddress" class="form-control" placeholder="Email" name="EmailAddress" value="" disabled />
+                    <input type="text" id="EmailAddress" class="form-control" placeholder="Email" name="EmailAddress" value="" />
                 </div>
             </div>
             <div class="form-group">
@@ -336,7 +333,7 @@
                 var alert = confirm(message)
                 if (alert == true) {
 
-                    window.location.href = "/Admin/GrpHealthEnrollment/?Employee_id=" + Employee_id;
+                    window.location.href = "/Admin/GroupHealthEnrollment/?Employee_id=" + Employee_id;
 
                 }
                 else {
@@ -371,7 +368,9 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#EmployeeEnrollmentUpdate").addEventListener("click", function () {
-            Role = document.getElementById("Role").value;
+            Id = document.getElementById("Id").value;
+            EmployeeNumber = document.getElementById("EmployeeNumber").value;
+            UserRole = document.getElementById("UserRole").value;
             Active = document.getElementById("Active").value;
             Retired = document.getElementById("Retired").value;
             Cobra = document.getElementById("Cobra").value;
@@ -389,7 +388,9 @@
             CobraState = document.getElementById("Cobra").checked;
 
             var data = {
-                "Role": Role,
+                "Id": Id,
+                "EmployeeNumber": EmployeeNumber,
+                "UserRole": UserRole,
                 "Active": Active,
                 "Retired": Retired,
                 "Cobra": Cobra,
@@ -534,6 +535,13 @@
     function FirstStep(emp) {
         document.querySelector("#FirstStep").nextElementSibling.style.display = "none";
         document.querySelector("#SecondStep").nextElementSibling.style.display = "block";
+
+        @*if (emp.error.length > 0) {
+
+            alert(emp.error);
+            window.location.href = "/Admin/Index?userId=@userId";
+        }*@
+
         Employee_id = emp.data;
     }
 
@@ -541,7 +549,6 @@
         document.querySelector("#FirstStep").nextElementSibling.style.display = "none";
         document.querySelector("#SecondStep").nextElementSibling.style.display = "none";
         document.querySelector("#ThirdStep").nextElementSibling.style.display = "block";
-
     }
 
     function ThirdStep(emp) {
